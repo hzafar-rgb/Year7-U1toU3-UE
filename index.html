@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Year 7 Maths Mastery — Units 1 to 3 · Interactive Revision</title>
+<style>
+  :root{
+    --indigo:#4338ca; --indigo-d:#312e81; --sky:#0ea5e9;
+    --ink:#0f172a; --ink2:#334155; --muted:#64748b;
+    --line:#e2e8f0; --bg:#eef2f8; --card:#ffffff;
+    --green:#16a34a; --green-bg:#dcfce7; --red:#dc2626; --red-bg:#fee2e2;
+    --amber:#b45309; --amber-bg:#fef3c7;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- header ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:linear-gradient(115deg,#312e81 0%,#4338ca 48%,#0ea5e9 100%);
+    color:#fff; padding:14px 22px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+    box-shadow:0 6px 22px rgba(15,23,42,.22);
+  }
+  .brand{display:flex; align-items:center; gap:14px}
+  .logo{
+    width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.16);
+    display:grid;place-items:center;font-weight:800;font-size:1.05rem;letter-spacing:.5px;
+    border:1px solid rgba(255,255,255,.35); flex:none;
+  }
+  .brand h1{margin:0;font-size:1.08rem;font-weight:800;letter-spacing:.2px}
+  .brand p{margin:2px 0 0;font-size:.78rem;opacity:.86}
+  .progress-wrap{min-width:230px; flex:0 1 300px}
+  .progress-label{font-size:.76rem;opacity:.92;margin-bottom:5px;display:flex;justify-content:space-between}
+  .bar{height:9px;background:rgba(255,255,255,.24);border-radius:99px;overflow:hidden}
+  .bar > div{height:100%;width:0%;background:linear-gradient(90deg,#a7f3d0,#34d399);border-radius:99px;transition:width .35s ease}
+
+  /* ---------- layout ---------- */
+  .layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:22px;max-width:1440px;margin:0 auto;padding:22px}
+  @media (max-width:980px){ .layout{grid-template-columns:1fr;padding:14px;gap:14px} }
+
+  /* ---------- sidebar ---------- */
+  .sidebar{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;
+    height:fit-content;position:sticky;top:90px;box-shadow:0 8px 24px rgba(15,23,42,.06);
+  }
+  @media (max-width:980px){ .sidebar{position:static;top:auto} }
+  .sidebar h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);margin:0 0 10px}
+  .navgroup{margin-bottom:14px}
+  .navgroup:last-child{margin-bottom:0}
+  .navgroup h3{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--indigo);margin:0 0 8px;font-weight:800}
+  .navgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+  @media (max-width:980px){ .navgrid{grid-template-columns:repeat(10,1fr)} }
+  @media (max-width:560px){ .navgrid{grid-template-columns:repeat(6,1fr)} }
+  .navbtn{
+    position:relative;border:1.5px solid var(--line);background:#f8fafc;color:var(--ink2);
+    border-radius:9px;padding:6px 0;font-size:.83rem;font-weight:700;cursor:pointer;
+    transition:.16s; font-variant-numeric:tabular-nums;
+  }
+  .navbtn:hover{border-color:#a5b4fc;background:#eef2ff;transform:translateY(-1px)}
+  .navbtn.active{background:linear-gradient(135deg,#4338ca,#0ea5e9);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(67,56,202,.35)}
+  .navbtn.done::after{
+    content:"✓";position:absolute;top:-5px;right:-5px;width:15px;height:15px;border-radius:50%;
+    background:var(--green);color:#fff;font-size:.6rem;display:grid;place-items:center;font-weight:900;
+    box-shadow:0 1px 3px rgba(0,0,0,.3);
+  }
+  .navbtn.active.done::after{background:#facc15;color:#78350f}
+
+  /* ---------- question card ---------- */
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(15,23,42,.07);overflow:hidden}
+  .qhead{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:16px 22px;background:linear-gradient(100deg,#f8fafc,#eef2ff);border-bottom:1px solid var(--line);
+  }
+  .qnum{
+    width:42px;height:42px;border-radius:12px;flex:none;
+    background:linear-gradient(135deg,#4338ca,#0ea5e9);color:#fff;display:grid;place-items:center;
+    font-weight:900;font-size:1.02rem;box-shadow:0 4px 12px rgba(67,56,202,.3);
+  }
+  .qmeta{flex:1;min-width:180px}
+  .qmeta h2{margin:0;font-size:1.06rem;font-weight:800}
+  .tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+       padding:2px 9px;border-radius:99px;background:#e0e7ff;color:#3730a3;margin-top:3px}
+  .qbody{padding:20px 22px 6px;font-size:1.02rem}
+  .qbody p{margin:.35em 0}
+  .parts{margin:.4em 0 .4em 1.2em;padding:0}
+  .parts li{margin:.35em 0}
+  .chiprow{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+  .chip{
+    display:inline-block;padding:8px 18px;border:2px solid #cbd5e1;border-radius:999px;
+    background:#f8fafc;font-weight:700;font-size:1.02rem;
+  }
+  .cmplist{display:grid;gap:8px;margin:12px 0;font-size:1.05rem;font-weight:600}
+  .blank{display:inline-block;min-width:44px;border-bottom:2px dashed #94a3b8;text-align:center;color:#94a3b8}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+  @media (max-width:1080px){ .twocol{grid-template-columns:1fr} }
+  .col{padding:18px 22px 22px}
+  .col.sol{background:#fbfcff;border-right:1px solid var(--line)}
+  @media (max-width:1080px){ .col.sol{border-right:none;border-bottom:1px solid var(--line)} }
+  .col h3{
+    margin:0 0 12px;font-size:.76rem;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:800;
+    display:flex;align-items:center;gap:8px;
+  }
+  .col h3::before{content:"";width:5px;height:16px;border-radius:3px;background:linear-gradient(#4338ca,#0ea5e9)}
+  .col.prac h3::before{background:linear-gradient(#0ea5e9,#34d399)}
+
+  /* ---------- solution steps ---------- */
+  .hint{
+    color:var(--muted);font-size:.9rem;background:#f1f5f9;border:1px dashed #cbd5e1;
+    border-radius:12px;padding:12px 14px;margin:0;
+  }
+  .solstep{
+    display:flex;gap:11px;margin-bottom:11px;animation:fade .32s ease both;
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 13px;
+    box-shadow:0 2px 8px rgba(15,23,42,.04);
+  }
+  .snum{
+    flex:none;width:23px;height:23px;border-radius:50%;background:#e0e7ff;color:#3730a3;
+    display:grid;place-items:center;font-size:.74rem;font-weight:900;margin-top:1px;
+  }
+  .solstep p{margin:.2em 0}
+  .solstep .ans{color:#065f46;background:#ecfdf5;border-radius:8px;padding:6px 10px;font-weight:700;display:inline-block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .solbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .btn{
+    border:1.5px solid var(--line);background:#fff;color:var(--ink2);border-radius:10px;
+    padding:8px 14px;font-size:.85rem;font-weight:700;cursor:pointer;transition:.16s;font-family:inherit;
+  }
+  .btn:hover{border-color:#a5b4fc;background:#eef2ff;transform:translateY(-1px)}
+  .btn.primary{background:linear-gradient(135deg,#4338ca,#4f46e5);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(67,56,202,.28)}
+  .btn.primary:hover{background:linear-gradient(135deg,#3730a3,#4338ca)}
+  .btn.ghost{background:transparent;border-color:transparent;color:var(--muted)}
+  .btn.ghost:hover{background:#f1f5f9}
+
+  /* ---------- tables ---------- */
+  table.pv{border-collapse:collapse;margin:8px 0;font-size:.88rem;width:100%;background:#fff;border-radius:10px;overflow:hidden}
+  table.pv th,table.pv td{border:1px solid var(--line);padding:6px 9px;text-align:center}
+  table.pv th{background:#eef2ff;color:#3730a3;font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  table.pv td b{color:#4338ca}
+
+  /* ---------- practice tasks ---------- */
+  .task{margin-bottom:18px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 3px 10px rgba(15,23,42,.04)}
+  .task-head{
+    padding:8px 14px;background:linear-gradient(100deg,#ecfeff,#f0fdf4);border-bottom:1px solid var(--line);
+    font-size:.74rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#0e7490;
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+  }
+  .task-body{padding:13px 14px}
+  .step{margin-bottom:12px}
+  .step:last-child{margin-bottom:0}
+  .step-q{font-weight:600;display:flex;gap:9px;margin-bottom:9px;font-size:.97rem}
+  .step-q .snum{margin-top:2px}
+  .opts{display:grid;gap:7px}
+  .opt{
+    text-align:left;border:1.5px solid var(--line);background:#f8fafc;border-radius:10px;
+    padding:9px 13px;font-size:.93rem;font-family:inherit;font-weight:600;color:var(--ink2);
+    cursor:pointer;transition:.15s; display:flex;align-items:center;gap:9px;
+  }
+  .opt:hover:not(:disabled){border-color:#a5b4fc;background:#eef2ff;transform:translateX(2px)}
+  .opt:disabled{cursor:default}
+  .opt.correct{background:var(--green-bg);border-color:var(--green);color:#14532d}
+  .opt.correct::before{content:"✓";font-weight:900;color:var(--green)}
+  .opt.wrong{background:var(--red-bg);border-color:var(--red);color:#7f1d1d;animation:shake .35s}
+  .opt.wrong::before{content:"✕";font-weight:900;color:var(--red)}
+  .opt:not(.correct):not(.wrong)::before{content:"";width:0}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .fb{
+    margin-top:9px;border-radius:10px;padding:9px 12px;font-size:.87rem;line-height:1.5;
+    animation:fade .25s ease both;
+  }
+  .fb.bad{background:var(--amber-bg);border-left:4px solid #f59e0b;color:#78350f}
+  .fb.ok{background:var(--green-bg);border-left:4px solid var(--green);color:#14532d;font-weight:600}
+  .taskdone{margin-top:6px;font-size:.85rem;font-weight:800;color:var(--green)}
+
+  .nline{width:100%;max-width:640px;display:block;margin:10px auto;background:#fff;border-radius:12px;border:1px solid var(--line)}
+  .grid{display:block;margin:8px 0}
+
+  footer{max-width:1440px;margin:0 auto;padding:6px 24px 40px;color:var(--muted);font-size:.78rem}
+  .kbd{background:#e2e8f0;border-radius:5px;padding:1px 6px;font-weight:700;font-size:.75rem}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">Y7</div>
+    <div>
+      <h1>Maths Mastery — Units 1 to 3</h1>
+      <p>Upper &amp; Extension · 30 questions · 53 marks · Interactive revision</p>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Practice progress</span><span id="pctTxt">0 / 0</span></div>
+    <div class="bar"><div id="barfill"></div></div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h2>Jump to a question</h2>
+    <div id="nav"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<footer>
+  Tip: try each question yourself before revealing the worked solution. The practice tasks give immediate
+  diagnostic feedback, so read the message if an answer is marked wrong.
+  <br><em>Note: the option lists for Q1, Q2, Q10, Q11 and Q20–Q23 were not readable in the source PDF, so they have been reconstructed in the same style.</em>
+</footer>
+
+<script>
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+
+/* Number-line diagram builder */
+function nl(o){
+  const w = o.w || 640, h = o.h || 96, pad = 52, y = 56;
+  const x0 = pad, x1 = w - pad, step = (x1 - x0) / o.n;
+  let s = `<svg class="nline" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">`;
+  s += `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="#334155" stroke-width="2.6" stroke-linecap="round"/>`;
+  for(let i=0;i<=o.n;i++){
+    const x = x0 + i*step;
+    s += `<line x1="${x}" y1="${y-10}" x2="${x}" y2="${y+10}" stroke="#334155" stroke-width="2.6" stroke-linecap="round"/>`;
+    if(o.labels && o.labels[i] !== undefined)
+      s += `<text x="${x}" y="${y+33}" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="700">${o.labels[i]}</text>`;
+  }
+  if(o.arrow !== undefined && o.arrow !== null){
+    const x = x0 + o.arrow*step;
+    s += `<line x1="${x}" y1="${y-46}" x2="${x}" y2="${y-24}" stroke="#e11d48" stroke-width="3.2" stroke-linecap="round"/>`;
+    s += `<polygon points="${x-7},${y-26} ${x+7},${y-26} ${x},${y-11}" fill="#e11d48"/>`;
+  }
+  s += `</svg>`;
+  return s;
+}
+
+/* Square-grid diagram */
+function squareGrid(n, cell){
+  cell = cell || 8;
+  const w = n*cell;
+  const size = Math.min(w, 116);
+  let s = `<svg class="grid" viewBox="0 0 ${w} ${w}" width="${size}" height="${size}">`;
+  for(let i=0;i<n;i++) for(let j=0;j<n;j++)
+    s += `<rect x="${j*cell}" y="${i*cell}" width="${cell}" height="${cell}" fill="#c7d2fe" stroke="#6366f1" stroke-width="0.7"/>`;
+  s += `</svg>`;
+  return s;
+}
+
+/* Prime-factor tree diagram for 80 (all leaves are prime) */
+function factorTree80(){
+  const FONT = 'font-family="Inter,system-ui,sans-serif"';
+  const prime = (cx,cy,label) =>
+    `<circle cx="${cx}" cy="${cy}" r="19" fill="#dcfce7" stroke="#16a34a" stroke-width="2.2"/>` +
+    `<text x="${cx}" y="${cy+1}" text-anchor="middle" dominant-baseline="central" ${FONT} font-size="17" font-weight="800" fill="#14532d">${label}</text>`;
+  const comp = (cx,cy,label) =>
+    `<rect x="${cx-24}" y="${cy-18}" width="48" height="36" rx="10" fill="#e0e7ff" stroke="#6366f1" stroke-width="2.2"/>` +
+    `<text x="${cx}" y="${cy+1}" text-anchor="middle" dominant-baseline="central" ${FONT} font-size="17" font-weight="800" fill="#3730a3">${label}</text>`;
+
+  // branch lines (centre to centre; the nodes are drawn on top)
+  const E = [[170,34,110,94],[170,34,230,94],[230,94,195,154],[230,94,275,154],
+             [275,154,245,214],[275,154,315,214],[315,214,285,274],[315,214,350,274]];
+  let s = `<svg viewBox="0 0 400 320" width="400" style="display:block;margin:12px auto;max-width:100%;height:auto;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px">`;
+  E.forEach(([x1,y1,x2,y2])=>{
+    s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/>`;
+  });
+  s += comp(170,34,'80');
+  s += prime(110,94,'2');
+  s += comp(230,94,'40');
+  s += prime(195,154,'2');
+  s += comp(275,154,'20');
+  s += prime(245,214,'2');
+  s += comp(315,214,'10');
+  s += prime(285,274,'2');
+  s += prime(350,274,'5');
+  s += `</svg>`;
+  return s;
+}
+
+/* Venn diagram of the prime factors of 12 and 28 */
+function venn12and28(){
+  const FONT = 'font-family="Inter,system-ui,sans-serif"';
+  let s = `<svg viewBox="0 0 460 306" width="460" style="display:block;margin:12px auto;max-width:100%;height:auto;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px">`;
+  // circles
+  s += `<circle cx="185" cy="165" r="105" fill="#dbeafe" fill-opacity="0.8" stroke="#2563eb" stroke-width="2.5"/>`;
+  s += `<circle cx="275" cy="165" r="105" fill="#fce7f3" fill-opacity="0.8" stroke="#db2777" stroke-width="2.5"/>`;
+  // set labels
+  s += `<text x="112" y="32" text-anchor="middle" ${FONT} font-size="18" font-weight="800" fill="#1d4ed8">12</text>`;
+  s += `<text x="348" y="32" text-anchor="middle" ${FONT} font-size="18" font-weight="800" fill="#be185d">28</text>`;
+  // prime factors
+  s += `<text x="128" y="166" text-anchor="middle" dominant-baseline="central" ${FONT} font-size="26" font-weight="800" fill="#1e3a8a">3</text>`;
+  s += `<text x="212" y="166" text-anchor="middle" dominant-baseline="central" ${FONT} font-size="26" font-weight="800" fill="#581c87">2</text>`;
+  s += `<text x="248" y="166" text-anchor="middle" dominant-baseline="central" ${FONT} font-size="26" font-weight="800" fill="#581c87">2</text>`;
+  s += `<text x="332" y="166" text-anchor="middle" dominant-baseline="central" ${FONT} font-size="26" font-weight="800" fill="#831843">7</text>`;
+  // captions
+  s += `<text x="122" y="292" text-anchor="middle" ${FONT} font-size="11.5" font-weight="700" fill="#64748b">only in 12</text>`;
+  s += `<text x="230" y="292" text-anchor="middle" ${FONT} font-size="11.5" font-weight="800" fill="#6d28d9">shared → HCF</text>`;
+  s += `<text x="340" y="292" text-anchor="middle" ${FONT} font-size="11.5" font-weight="700" fill="#64748b">only in 28</text>`;
+  s += `</svg>`;
+  return s;
+}
+
+/* =====================================================================
+   QUESTION BANK
+   ===================================================================== */
+const QUESTIONS = [
+
+/* ---------------- Q1 ---------------- */
+{
+  n:1, unit:1, title:'Place value — hundredths',
+  question:`<p>Circle the number below that has <b>7 hundredths</b>.</p>
+    <div class="chiprow">
+      <span class="chip">4.7</span><span class="chip">4.07</span>
+      <span class="chip">4.70</span><span class="chip">4.007</span>
+    </div>`,
+  solution:[
+    `<p>After the decimal point the columns are named: <b>tenths</b>, then <b>hundredths</b>, then <b>thousandths</b>.</p>`,
+    `<p>Look at where the digit 7 sits in each number:</p>
+     <table class="pv">
+       <tr><th>Number</th><th>Place of the 7</th><th>Value of the 7</th></tr>
+       <tr><td>4.7</td><td>tenths</td><td>0.7</td></tr>
+       <tr><td>4.07</td><td><b>hundredths</b></td><td><b>0.07</b></td></tr>
+       <tr><td>4.70</td><td>tenths (4.70 = 4.7)</td><td>0.7</td></tr>
+       <tr><td>4.007</td><td>thousandths</td><td>0.007</td></tr>
+     </table>`,
+    `<p>We need the 7 in the <b>second</b> column after the decimal point.</p>`,
+    `<p class="ans">Answer: <b>4.07</b></p>`
+  ],
+  tasks:[
+    {title:'Practice · hundredths', steps:[{
+      q:'Which number has <b>5 hundredths</b>?',
+      opts:[
+        {t:'3.5', fb:'Here the 5 is in the <b>tenths</b> column (5 tenths = 0.5). Hundredths is the <i>second</i> column after the point.'},
+        {t:'3.05', ok:true, ex:'The 5 sits in the second column after the point, so it is worth 5 hundredths (0.05).'},
+        {t:'3.50', fb:'3.50 is the same as 3.5 — the 5 is still in the tenths column. A trailing zero does not move the digit.'},
+        {t:'3.005', fb:'Here the 5 is in the <b>thousandths</b> column (the third one), not hundredths.'}
+      ]}]},
+    {title:'Practice · tenths', steps:[{
+      q:'Which number has <b>8 tenths</b>?',
+      opts:[
+        {t:'6.08', fb:'The 8 here is in the hundredths column (0.08). Tenths is the <i>first</i> column after the point.'},
+        {t:'6.008', fb:'The 8 is in the thousandths column (0.008).'},
+        {t:'6.8', ok:true, ex:'The 8 is the first digit after the point, so it is worth 8 tenths (0.8).'},
+        {t:'0.68', fb:'This number does have 8 hundredths, but its tenths digit is 6, not 8.'}
+      ]}]},
+    {title:'Practice · thousandths', steps:[{
+      q:'Which number has <b>2 thousandths</b>?',
+      opts:[
+        {t:'7.2', fb:'The 2 is in the tenths column (0.2).'},
+        {t:'7.02', fb:'The 2 is in the hundredths column (0.02) — one column too early.'},
+        {t:'7.002', ok:true, ex:'Thousandths is the third column after the point, so 7.002 has 2 thousandths.'},
+        {t:'7.20', fb:'7.20 = 7.2, so the 2 is in the tenths column.'}
+      ]}]},
+    {title:'Practice · naming a digit', steps:[{
+      q:'In the number <b>15.364</b>, which digit is in the <b>hundredths</b> place?',
+      opts:[
+        {t:'1', fb:'The 1 is in the tens column — it is before the decimal point.'},
+        {t:'3', fb:'The 3 is the first digit after the point, so it is in the <b>tenths</b> place.'},
+        {t:'6', ok:true, ex:'15.364 means 3 tenths, 6 hundredths and 4 thousandths. The hundredths digit is 6.'},
+        {t:'4', fb:'The 4 is the third digit after the point — the <b>thousandths</b> place.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q2 ---------------- */
+{
+  n:2, unit:1, title:'Place value — the tens column',
+  question:`<p>Circle the number below that has <b>two tens</b>.</p>
+    <div class="chiprow">
+      <span class="chip">9372</span><span class="chip">4528</span>
+      <span class="chip">2745</span><span class="chip">8261</span>
+    </div>`,
+  solution:[
+    `<p>Split each number into thousands, hundreds, tens and ones:</p>
+     <table class="pv">
+       <tr><th>Number</th><th>Thousands</th><th>Hundreds</th><th>Tens</th><th>Ones</th></tr>
+       <tr><td>9372</td><td>9</td><td>3</td><td>7</td><td>2</td></tr>
+       <tr><td>4528</td><td>4</td><td>5</td><td><b>2</b></td><td>8</td></tr>
+       <tr><td>2745</td><td>2</td><td>7</td><td>4</td><td>5</td></tr>
+       <tr><td>8261</td><td>8</td><td>2</td><td>6</td><td>1</td></tr>
+     </table>`,
+    `<p>"Two tens" means the digit <b>2</b> is sitting in the tens column — the second column from the right.</p>`,
+    `<p class="ans">Answer: <b>4528</b> (it has 2 tens, which are worth 20)</p>`
+  ],
+  tasks:[
+    {title:'Practice · the tens digit', steps:[{
+      q:'Which number has <b>4 tens</b>?',
+      opts:[
+        {t:'3472', fb:'The tens digit is 7, not 4 (3472 = 3 thousands, 4 <i>hundreds</i>, 7 tens, 2 ones).'},
+        {t:'5284', fb:'The tens digit is 8 — be careful not to look at the hundreds column.'},
+        {t:'7041', ok:true, ex:'7041 = 7 thousands, 0 hundreds, 4 tens, 1 one. The tens digit is 4.'},
+        {t:'8306', fb:'The tens digit is 0 here (8306 = 8 thousands, 3 hundreds, 0 tens, 6 ones).'}
+      ]}]},
+    {title:'Practice · the hundreds digit', steps:[{
+      q:'Which number has <b>6 hundreds</b>?',
+      opts:[
+        {t:'3624', ok:true, ex:'3624 = 3 thousands, 6 hundreds, 2 tens, 4 ones — the hundreds digit is 6.'},
+        {t:'5468', fb:'The hundreds digit is 4 (5 thousands, 4 hundreds).'},
+        {t:'2160', fb:'The hundreds digit is 1 (2 thousands, 1 hundred).'},
+        {t:'9007', fb:'The hundreds digit is 0 — there are no hundreds in 9007.'}
+      ]}]},
+    {title:'Practice · a zero in a column', steps:[{
+      q:'Which number has <b>0 tens</b>?',
+      opts:[
+        {t:'4519', fb:'The tens digit is 1 (4519 = 4 thousands, 5 hundreds, 1 ten, 9 ones).'},
+        {t:'3090', fb:'The tens digit is 9 (3090 = 3 thousands, 0 hundreds, 9 tens, 0 ones).'},
+        {t:'2004', ok:true, ex:'2004 = 2 thousands, 0 hundreds, 0 tens, 4 ones — the tens digit is 0.'},
+        {t:'7140', fb:'The tens digit is 4 here; it is the <i>ones</i> digit that is 0.'}
+      ]}]},
+    {title:'Practice · the thousands digit', steps:[{
+      q:'Which number has <b>3 thousands</b>?',
+      opts:[
+        {t:'8305', fb:'The thousands digit is 8.'},
+        {t:'3236', ok:true, ex:'3236 = 3 thousands, 2 hundreds, 3 tens, 6 ones — the thousands digit is 3.'},
+        {t:'1300', fb:'The thousands digit is 1.'},
+        {t:'6030', fb:'The thousands digit is 6.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q3 ---------------- */
+{
+  n:3, unit:1, title:'Writing numbers in digits',
+  question:`<p>Write the number <b>"nine hundred thousand and fifty four"</b> in digits.</p>`,
+  solution:[
+    `<p>Break the words into their place-value chunks: <b>nine hundred thousand</b> and <b>fifty four</b>.</p>`,
+    `<p>"Nine hundred thousand" = 900 000.</p>`,
+    `<p>"Fifty four" = 54 — it fills the <b>tens</b> and <b>ones</b> columns.</p>`,
+    `<p>The thousands and hundreds columns are empty, so we must write <b>zeros</b> to hold their places.</p>`,
+    `<p class="ans">Answer: <b>900 054</b></p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Write "six hundred thousand and thirty seven" in digits.',
+      opts:[
+        {t:'60 037', fb:'That is only sixty thousand. "Six hundred thousand" needs three zeros after the 6: 600 000.'},
+        {t:'600 037', ok:true, ex:'600 000 + 37 = 600 037. The thousands and hundreds columns hold zeros.'},
+        {t:'637 000', fb:'That is six hundred and thirty seven thousand — the 37 has gone into the thousands columns.'},
+        {t:'600 370', fb:'That is six hundred thousand, three hundred and seventy. "Thirty seven" fills only tens and ones.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Write "two hundred thousand and sixty" in digits.',
+      opts:[
+        {t:'200 060', ok:true, ex:'200 000 + 60 = 200 060 — the tens digit is 6 and the ones digit is 0.'},
+        {t:'200 600', fb:'That is six hundred, not sixty. Sixty has 6 in the tens column.'},
+        {t:'20 060', fb:'That is twenty thousand, not two hundred thousand.'},
+        {t:'2060', fb:'That is two thousand and sixty — far too small.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Write "seven hundred and eight thousand, four hundred and twelve" in digits.',
+      opts:[
+        {t:'78 412', fb:'The "708" part must be in the thousands columns: 708 412.'},
+        {t:'708 412', ok:true, ex:'708 thousands and 412 = 708 412. The 0 holds the ten-thousands place.'},
+        {t:'780 412', fb:'"Seven hundred and eight thousand" is 708 000, not 780 000.'},
+        {t:'708 042', fb:'The hundreds digit of the second chunk is 4, so it should read 412, not 042.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Write "one hundred thousand and five" in digits.',
+      opts:[
+        {t:'100 005', ok:true, ex:'100 000 + 5 = 100 005 — the ones column holds the 5.'},
+        {t:'15 000', fb:'That is fifteen thousand — the words "one hundred thousand" have been lost.'},
+        {t:'100 050', fb:'That is one hundred thousand and fifty. "Five" alone fills only the ones column.'},
+        {t:'1005', fb:'That is one thousand and five — too small.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q4 ---------------- */
+{
+  n:4, unit:1, title:'Multiplying and dividing by 10 and 100',
+  question:`<p>Work out:</p>
+    <ol class="parts" type="a">
+      <li>2.84 × 100</li>
+      <li>0.48 × 10</li>
+      <li>24.24 ÷ 10</li>
+    </ol>`,
+  solution:[
+    `<p><b>Key idea:</b> multiplying by 10 moves every digit one place to the <b>left</b>; multiplying by 100 moves every digit <b>two</b> places to the left. Dividing by 10 moves every digit one place to the <b>right</b>.</p>`,
+    `<p><b>a.</b> 2.84 × 100 &nbsp;→ move the digits 2 places left: 2.84 → 28.4 → <b>284</b></p>`,
+    `<p><b>b.</b> 0.48 × 10 &nbsp;→ move the digits 1 place left: 0.48 → <b>4.8</b></p>`,
+    `<p><b>c.</b> 24.24 ÷ 10 &nbsp;→ move the digits 1 place right: 24.24 → <b>2.424</b></p>`,
+    `<p class="ans">Answers: a) 284 &nbsp; b) 4.8 &nbsp; c) 2.424</p>`
+  ],
+  tasks:[
+    {title:'Practice (a) · multiplying by 100', steps:[
+      {
+        q:'When you multiply a number by 100, the digits move…',
+        opts:[
+          {t:'1 place to the left', fb:'That is what multiplying by 10 does. Multiplying by 100 makes the number 100 times bigger.'},
+          {t:'2 places to the left', ok:true, ex:'×100 makes each digit 100 times bigger, so it moves two columns left.'},
+          {t:'2 places to the right', fb:'Moving right makes the number <i>smaller</i> — that is dividing by 100.'},
+          {t:'nowhere — only the decimal point moves', fb:'The value must change, so the digits really do change columns. (Moving the decimal point is just a quick way of describing that move.)'}
+        ]
+      },
+      {
+        q:'So, 3.76 × 100 = ?',
+        opts:[
+          {t:'0.0376', fb:'You divided by 100 instead of multiplying.'},
+          {t:'37.6', fb:'You multiplied by 10 only. Multiply by 100 to move two places.'},
+          {t:'376', ok:true, ex:'3.76 → 37.6 (×10) → 376 (×100).'},
+          {t:'3760', fb:'You multiplied by 1000. Check the number of zeros: 100 has two.'}
+        ]
+      }
+    ]},
+    {title:'Practice (b) · multiplying by 10', steps:[{
+      q:'Work out <b>0.62 × 10</b>',
+      opts:[
+        {t:'0.062', fb:'You divided by 10. Multiplying by 10 makes the number <i>bigger</i>.'},
+        {t:'62', fb:'That is ×100. Multiplying by 10 moves the digits just one place.'},
+        {t:'6.2', ok:true, ex:'0.62 × 10 = 6.2 — each digit moved one place left.'},
+        {t:'620', fb:'That is ×1000 — three places. 10 has only one zero.'}
+      ]}]},
+    {title:'Practice (c) · dividing by 10', steps:[{
+      q:'Work out <b>47.3 ÷ 10</b>',
+      opts:[
+        {t:'473', fb:'You multiplied by 10. Dividing makes the number smaller.'},
+        {t:'0.473', fb:'You divided by 100 — that is two places. ÷10 moves one place.'},
+        {t:'4.73', ok:true, ex:'47.3 ÷ 10 = 4.73 — each digit moved one place right.'},
+        {t:'0.0473', fb:'You divided by 1000. ÷10 only moves one place.'}
+      ]}]},
+    {title:'Practice · mixed', steps:[{
+      q:'Work out <b>5.6 × 100</b>',
+      opts:[
+        {t:'56', fb:'That is ×10. Multiplying by 100 moves the digits two places.'},
+        {t:'560', ok:true, ex:'5.6 → 56 (×10) → 560 (×100).'},
+        {t:'5600', fb:'That is ×1000. There are only two zeros in 100.'},
+        {t:'0.056', fb:'You divided by 100 instead of multiplying.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q5 ---------------- */
+{
+  n:5, unit:1, title:'Column addition',
+  question:`<p>Work out <b>3970 + 197</b></p>`,
+  solution:[
+    `<p>Set the numbers out in place-value columns with the digits lined up:</p>
+     <table class="pv">
+       <tr><th></th><th>Th</th><th>H</th><th>T</th><th>O</th></tr>
+       <tr><td>&nbsp;</td><td>3</td><td>9</td><td>7</td><td>0</td></tr>
+       <tr><td>+</td><td>0</td><td>1</td><td>9</td><td>7</td></tr>
+     </table>`,
+    `<p><b>Ones:</b> 0 + 7 = 7.</p>`,
+    `<p><b>Tens:</b> 7 + 9 = 16 → write 6, carry 1.</p>`,
+    `<p><b>Hundreds:</b> 9 + 1 + 1 (carried) = 11 → write 1, carry 1.</p>`,
+    `<p><b>Thousands:</b> 3 + 0 + 1 (carried) = 4.</p>`,
+    `<p class="ans">Answer: <b>4167</b></p>`,
+    `<p><b>Neat check:</b> 3970 + 197 = 3970 + 200 − 3 = 4170 − 3 = 4167 ✓</p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Work out <b>2468 + 3575</b>',
+      opts:[
+        {t:'5943', fb:'Re-check the hundreds column: 4 + 5 + 1 carried = 10, so you write 0 and carry 1.'},
+        {t:'6043', ok:true, ex:'8+5=13 (3, carry 1); 6+7+1=14 (4, carry 1); 4+5+1=10 (0, carry 1); 2+3+1=6. Answer 6043.'},
+        {t:'6033', fb:'Check the tens column: 6 + 7 + 1 carried = 14, so it is 4, not 3.'},
+        {t:'6143', fb:'Check the hundreds: 4 + 5 + 1 = 10, giving a 0 not a 1.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>4096 + 875</b>',
+      opts:[
+        {t:'4861', fb:'Remember the carry from the tens column into the hundreds.'},
+        {t:'4971', ok:true, ex:'6+5=11 (1, carry 1); 9+7+1=17 (7, carry 1); 0+8+1=9; 4 stays. Answer 4971.'},
+        {t:'5071', fb:'4 + 0 = 4 in the thousands, not 5 — no carry reaches the thousands here.'},
+        {t:'4961', fb:'Check the tens: 9 + 7 + 1 = 17, so it is 7 not 6.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>5830 + 2469</b>',
+      opts:[
+        {t:'7299', fb:'Check the thousands: 5 + 2 + 1 carried = 8.'},
+        {t:'8199', fb:'Check the hundreds: 8 + 4 + 1 carried = 13, so 3 not 1.'},
+        {t:'8299', ok:true, ex:'0+9=9; 3+6=9; 8+4+1=13 (3, carry 1); 5+2+1=8. Answer 8299.'},
+        {t:'8309', fb:'Check the tens column: 3 + 6 = 9, so the tens digit is 9.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>1777 + 555</b>',
+      opts:[
+        {t:'2222', fb:'That ignores the carrying. 7 + 5 = 12, so you must carry.'},
+        {t:'2332', ok:true, ex:'7+5=12 (2, carry 1); 7+5+1=13 (3, carry 1); 7+5+1=13 (3, carry 1); 1+1=2. Answer 2332.'},
+        {t:'2322', fb:'Check the tens column: 7 + 5 + 1 carried = 13, giving 3 not 2.'},
+        {t:'2432', fb:'Check the thousands: 1 + 1 carried = 2, not 4.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q6 ---------------- */
+{
+  n:6, unit:1, title:'Column subtraction with decimals',
+  question:`<p>Work out <b>104.92 − 8.78</b></p>`,
+  solution:[
+    `<p>Line up the decimal points, and fill the empty places with zeros so both numbers have the same number of digits:</p>
+     <table class="pv">
+       <tr><th></th><th>H</th><th>T</th><th>O</th><th>•</th><th>t</th><th>h</th></tr>
+       <tr><td>&nbsp;</td><td>1</td><td>0</td><td>4</td><td>.</td><td>9</td><td>2</td></tr>
+       <tr><td>−</td><td>0</td><td>0</td><td>8</td><td>.</td><td>7</td><td>8</td></tr>
+     </table>`,
+    `<p><b>Hundredths:</b> 2 − 8 — we cannot do this, so borrow: 12 − 8 = 4.</p>`,
+    `<p><b>Tenths:</b> the 9 has become 8, so 8 − 7 = 1.</p>`,
+    `<p><b>Ones:</b> 4 − 8 — borrow from the tens/hundreds: 14 − 8 = 6.</p>`,
+    `<p><b>Tens &amp; hundreds:</b> the 104 has become 9 tens and 0 hundreds, so 9 − 0 = 9, and nothing is left in the hundreds.</p>`,
+    `<p class="ans">Answer: <b>96.14</b></p>`,
+    `<p><b>Check by adding back:</b> 96.14 + 8.78 = 104.92 ✓</p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Work out <b>205.3 − 46.75</b>',
+      opts:[
+        {t:'158.55', ok:true, ex:'Write 205.30 − 46.75. Borrowing carefully gives 158.55. Check: 158.55 + 46.75 = 205.30 ✓'},
+        {t:'159.55', fb:'Check the ones column: you borrow, so 205.30 → 14 ones minus 6 gives 8, not 9.'},
+        {t:'158.65', fb:'Check the tenths: 3 tenths borrows to become 12 tenths; 12 − 7 = 5, not 6.'},
+        {t:'242.05', fb:'You added instead of subtracting.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>60.04 − 7.6</b>',
+      opts:[
+        {t:'52.44', ok:true, ex:'Write 60.04 − 7.60 = 52.44. Check: 52.44 + 7.60 = 60.04 ✓'},
+        {t:'53.44', fb:'Check the ones column — you must borrow, so 60.04 becomes 59 ones and 10 tenths.'},
+        {t:'52.04', fb:'Check the tenths: after borrowing there are 10 tenths, and 10 − 6 = 4.'},
+        {t:'59.28', fb:'That is 60.04 − 0.76 — the 7 must come out of the ones column.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>12.5 − 3.86</b>',
+      opts:[
+        {t:'8.64', ok:true, ex:'Write 12.50 − 3.86 = 8.64. Check: 8.64 + 3.86 = 12.50 ✓'},
+        {t:'9.36', fb:'Check the ones column: you must borrow from the tens, so it is 11 − 3 = 8.'},
+        {t:'8.74', fb:'Check the hundredths first: 0 − 6 needs a borrow, which leaves 4 tenths to work with.'},
+        {t:'8.94', fb:'Check the hundredths: 0 − 6 requires a borrow giving 10 − 6 = 4.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>300 − 45.7</b>',
+      opts:[
+        {t:'254.3', ok:true, ex:'Write 300.0 − 45.7 = 254.3. Check: 254.3 + 45.7 = 300.0 ✓'},
+        {t:'255.3', fb:'Check the tens column: after borrowing you have 9 tens, and 9 − 4 = 5.'},
+        {t:'245.3', fb:'Check the hundreds: 300 has to lend, leaving 2 hundreds.'},
+        {t:'344.7', fb:'You added instead of subtracting.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q7 ---------------- */
+{
+  n:7, unit:1, title:'Money problem — sales and profit',
+  question:`<p>Xavier has started a small business buying and selling stationery. He buys 1000 pencils for £800. He sells all the pencils at £0.85 each.</p>
+   <ol class="parts" type="a">
+     <li>How much money does Xavier have from the sale of the pencils?</li>
+     <li>How much profit does he make? <em>(Profit is the amount of money left once the original buying price has been deducted.)</em></li>
+   </ol>`,
+  solution:[
+    `<p><b>a.</b> He sells 1000 pencils at £0.85 each. "Each" means multiply:</p>`,
+    `<p>1000 × £0.85 = £850 &nbsp;(because 1000 × 85 = 85 000, and 85 000 ÷ 100 = 850)</p>`,
+    `<p><b>b.</b> Profit = money from sales − money spent buying the stock.</p>`,
+    `<p>£850 − £800 = £50</p>`,
+    `<p class="ans">Answers: a) <b>£850</b> &nbsp;&nbsp; b) <b>£50</b></p>`,
+    `<p><b>Check:</b> £50 profit over 1000 pencils is 5p profit per pencil — that matches £0.85 selling price − £0.80 cost price ✓</p>`
+  ],
+  tasks:[
+    {title:'Practice (a) · money from sales', steps:[
+      {
+        q:'Sam buys 200 pens for £60 and sells them all at £0.45 each. <b>Which calculation</b> finds the money he takes from the sales?',
+        opts:[
+          {t:'200 ÷ 0.45', fb:'Dividing by the price tells you how many pens £1 would buy — not the money he receives.'},
+          {t:'200 × 0.45', ok:true, ex:'Number of pens × price of each pen = total money taken.'},
+          {t:'60 ÷ 200', fb:'That finds the cost of one pen (£0.30), not the sales money.'},
+          {t:'200 + 0.45', fb:'You cannot add a number of pens to a price — you need to multiply them.'}
+        ]
+      },
+      {
+        q:'Now work out <b>200 × 0.45</b>',
+        opts:[
+          {t:'9', fb:'Check the zeros: 200 × 0.45 = 2 × 100 × 0.45 = 2 × 45 = 90.'},
+          {t:'90', ok:true, ex:'100 × 0.45 = 45, so 200 × 0.45 = 90. Sam takes £90.'},
+          {t:'900', fb:'Too big — 200 × 0.5 = 100, so the answer must be a little less than 100.'},
+          {t:'45', fb:'That is 100 × 0.45, not 200 × 0.45.'}
+        ]
+      }
+    ]},
+    {title:'Practice (b) · profit', steps:[{
+      q:'Sam spent £60 on the pens and took £90 from sales. What is his <b>profit</b>?',
+      opts:[
+        {t:'£30', ok:true, ex:'Profit = sales − cost = 90 − 60 = £30.'},
+        {t:'£150', fb:'That is sales + cost. Profit is what is <i>left over</i>, so you subtract.'},
+        {t:'£90', fb:'£90 is the money from sales, but Sam still has to pay back the £60 he spent.'},
+        {t:'£20', fb:'Check: 90 − 60 = 30, not 20.'}
+      ]}]},
+    {title:'Practice · full profit problem', steps:[{
+      q:'A shop buys 50 toys at £4 each and sells them all at £6 each. What is the <b>profit</b>?',
+      opts:[
+        {t:'£100', ok:true, ex:'Cost = 50 × 4 = £200. Sales = 50 × 6 = £300. Profit = 300 − 200 = £100.'},
+        {t:'£300', fb:'That is the sales money. You must subtract the £200 it cost to buy the toys.'},
+        {t:'£200', fb:'That is the cost, not the profit.'},
+        {t:'£50', fb:'That is the number of toys. Work out cost and sales first.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q8 ---------------- */
+{
+  n:8, unit:1, title:'Missing numbers in calculations',
+  question:`<p>Fill in the gaps for each calculation.</p>
+   <ol class="parts" type="a">
+     <li>23 × <span class="blank">?</span> = 230 000</li>
+     <li>9700 ÷ <span class="blank">?</span> = 9.7</li>
+   </ol>`,
+  solution:[
+    `<p><b>a.</b> The gap is the number you must multiply 23 by. Undo the multiplication with a division: 230 000 ÷ 23.</p>`,
+    `<p>230 000 ÷ 23 = 10 000. &nbsp; <em>Check:</em> 23 × 10 000 = 230 000 ✓</p>`,
+    `<p><b>b.</b> The gap is the number you divide 9700 by. Undo a division with a multiplication: 9700 ÷ 9.7.</p>`,
+    `<p>9700 ÷ 9.7 = 1000. &nbsp; <em>Check:</em> 9700 ÷ 1000 = 9.7 ✓</p>`,
+    `<p class="ans">Answers: a) <b>10 000</b> &nbsp; b) <b>1000</b></p>`
+  ],
+  tasks:[
+    {title:'Practice (a) · finding the missing multiplier', steps:[
+      {
+        q:'To find the gap in <b>15 × ? = 45 000</b>, what should you work out?',
+        opts:[
+          {t:'45 000 ÷ 15', ok:true, ex:'Multiplication and division are inverse operations, so divide the answer by the known number.'},
+          {t:'45 000 × 15', fb:'Multiplying makes the number even bigger — you need to <i>undo</i> the ×15.'},
+          {t:'15 ÷ 45 000', fb:'That gives a tiny decimal. Divide the big number by the small one.'},
+          {t:'45 000 − 15', fb:'Subtraction undoes addition, not multiplication.'}
+        ]
+      },
+      {
+        q:'So <b>45 000 ÷ 15 = ?</b>',
+        opts:[
+          {t:'300', fb:'45 ÷ 15 = 3, so 45 000 ÷ 15 = 3000 — check the zeros.'},
+          {t:'3000', ok:true, ex:'45 000 ÷ 15 = 3000. Check: 15 × 3000 = 45 000 ✓'},
+          {t:'30 000', fb:'Too big — 15 × 30 000 = 450 000, ten times too much.'},
+          {t:'300 000', fb:'Far too big. Estimate: 45 000 ÷ 15 is about 3000.'}
+        ]
+      }
+    ]},
+    {title:'Practice (b) · finding the missing divisor', steps:[{
+      q:'Find the gap: <b>6400 ÷ ? = 6.4</b>',
+      opts:[
+        {t:'10', fb:'6400 ÷ 10 = 640, not 6.4. Dividing by 10 moves the digits only one place.'},
+        {t:'100', fb:'6400 ÷ 100 = 64, still too big.'},
+        {t:'1000', ok:true, ex:'6400 ÷ 1000 = 6.4 — the digits move three places right.'},
+        {t:'10 000', fb:'6400 ÷ 10 000 = 0.64, which is too small.'}
+      ]}]},
+    {title:'Practice · missing multiplier', steps:[{
+      q:'Find the gap: <b>34 × ? = 340 000</b>',
+      opts:[
+        {t:'100', fb:'34 × 100 = 3400. You need two more zeros.'},
+        {t:'1000', fb:'34 × 1000 = 34 000. You need one more zero.'},
+        {t:'10 000', ok:true, ex:'34 × 10 000 = 340 000 ✓'},
+        {t:'100 000', fb:'34 × 100 000 = 3 400 000 — ten times too big.'}
+      ]}]},
+    {title:'Practice · missing multiplier', steps:[{
+      q:'Find the gap: <b>8.2 × ? = 8200</b>',
+      opts:[
+        {t:'10', fb:'8.2 × 10 = 82. Not big enough.'},
+        {t:'100', fb:'8.2 × 100 = 820. One more zero needed.'},
+        {t:'1000', ok:true, ex:'8.2 × 1000 = 8200 ✓ (the digits move three places left).'},
+        {t:'10 000', fb:'8.2 × 10 000 = 82 000 — ten times too big.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q9 ---------------- */
+{
+  n:9, unit:1, title:'Reading a decimal number line',
+  question:`<p>Here is a number line. What number is the arrow pointing to?</p>` +
+    nl({n:5, labels:{0:'2.5', 3:'2.8', 5:'3'}, arrow:2}),
+  solution:[
+    `<p>The marked ends are 2.5 and 3, so the whole line is worth 3 − 2.5 = <b>0.5</b>.</p>`,
+    `<p>Count the equal jumps between 2.5 and 3: there are <b>5</b> of them.</p>`,
+    `<p>Each jump is worth 0.5 ÷ 5 = <b>0.1</b>.</p>`,
+    `<p>Counting on from 2.5: 2.5, 2.6, <b>2.7</b> — the arrow is on the 3rd mark.</p>`,
+    `<p class="ans">Answer: <b>2.7</b> &nbsp;(it sits just before the 2.8 mark, which confirms it)</p>`
+  ],
+  tasks:[
+    {title:'Practice · reading a number line', steps:[
+      {
+        q:`What is the gap between the two ends of this line?` + nl({n:5, labels:{0:'5.2', 5:'5.7'}, arrow:2, h:96}),
+        opts:[
+          {t:'0.5', ok:true, ex:'5.7 − 5.2 = 0.5.'},
+          {t:'0.4', fb:'Subtract carefully: 5.7 − 5.2 = 0.5.'},
+          {t:'5', fb:'That is the difference between the whole-number parts only — remember the decimals.'},
+          {t:'1', fb:'The line goes from 5.2 to 5.7, which is less than one whole unit.'}
+        ]
+      },
+      {
+        q:'The line from 5.2 to 5.7 is split into <b>5 equal jumps</b>. What is each jump worth?',
+        opts:[
+          {t:'0.1', ok:true, ex:'0.5 ÷ 5 = 0.1, so each jump is one tenth.'},
+          {t:'0.05', fb:'That would need 10 jumps, not 5.'},
+          {t:'0.5', fb:'That is the whole length of the line, not one jump.'},
+          {t:'1', fb:'One jump is much smaller than a whole unit here.'}
+        ]
+      },
+      {
+        q:'The arrow is <b>2 jumps</b> after 5.2. What number does it show?',
+        opts:[
+          {t:'5.3', fb:'That is only 1 jump after 5.2.'},
+          {t:'5.4', ok:true, ex:'5.2 + 0.1 + 0.1 = 5.4.'},
+          {t:'5.6', fb:'That is 4 jumps after 5.2.'},
+          {t:'5.7', fb:'That is the end of the line — 5 jumps after 5.2.'}
+        ]
+      }
+    ]},
+    {title:'Practice · another number line', steps:[{
+      q:`What number is the arrow pointing to?` + nl({n:4, labels:{0:'0.6', 4:'1.0'}, arrow:3, h:96}),
+      opts:[
+        {t:'0.8', fb:'Count the jumps again — the arrow is on the 3rd mark after 0.6.'},
+        {t:'0.9', ok:true, ex:'0.4 ÷ 4 = 0.1 per jump, so 0.6 + 0.1 + 0.1 + 0.1 = 0.9.'},
+        {t:'0.95', fb:'Each jump is 0.1, so the marks are 0.6, 0.7, 0.8, 0.9, 1.0.'},
+        {t:'1.0', fb:'That is the right-hand end of the line.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q10 ---------------- */
+{
+  n:10, unit:2, title:'Commutative operations',
+  question:`<p>Circle <b>all</b> the operations that are commutative.</p>
+    <div class="chiprow">
+      <span class="chip">+</span><span class="chip">−</span>
+      <span class="chip">÷</span><span class="chip">×</span>
+    </div>`,
+  solution:[
+    `<p><b>Commutative</b> means the order does not matter: a ★ b gives the same answer as b ★ a.</p>`,
+    `<p><b>Addition:</b> 3 + 5 = 8 and 5 + 3 = 8 ✓ commutative.</p>`,
+    `<p><b>Multiplication:</b> 4 × 6 = 24 and 6 × 4 = 24 ✓ commutative.</p>`,
+    `<p><b>Subtraction:</b> 8 − 3 = 5 but 3 − 8 = −5 ✗ not commutative.</p>`,
+    `<p><b>Division:</b> 12 ÷ 4 = 3 but 4 ÷ 12 = ⅓ ✗ not commutative.</p>`,
+    `<p class="ans">Answer: <b>+</b> and <b>×</b> only</p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Which calculation shows that <b>addition</b> is commutative?',
+      opts:[
+        {t:'4 + 9 = 9 + 4', ok:true, ex:'The two numbers swap places and the total is unchanged.'},
+        {t:'4 + 9 = 9 − 4', fb:'That mixes addition and subtraction — it is not even true (13 ≠ 5).'},
+        {t:'4 × 9 = 9 × 4', fb:'This is true, but it shows that <i>multiplication</i> is commutative.'},
+        {t:'4 + 9 = 13', fb:'That is a correct sum, but it says nothing about swapping the order.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which statement is <b>TRUE</b>?',
+      opts:[
+        {t:'15 ÷ 3 = 3 ÷ 15', fb:'15 ÷ 3 = 5 but 3 ÷ 15 = 0.2 — division is not commutative.'},
+        {t:'15 − 3 = 3 − 15', fb:'12 ≠ −12. Subtraction is not commutative.'},
+        {t:'15 × 3 = 3 × 15', ok:true, ex:'Both equal 45 — multiplication is commutative.'},
+        {t:'15 + 3 = 3 − 15', fb:'18 ≠ −12 — and this compares different operations.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which pair of calculations gives <b>different</b> answers, showing that subtraction is NOT commutative?',
+      opts:[
+        {t:'10 − 4 and 4 − 10', ok:true, ex:'6 and −6 are different, so the order matters for subtraction.'},
+        {t:'10 + 4 and 4 + 10', fb:'Both give 14 — that shows addition IS commutative.'},
+        {t:'10 × 4 and 4 × 10', fb:'Both give 40 — multiplication is commutative.'},
+        {t:'10 − 4 and 10 − 4', fb:'These are identical, so they cannot show a difference.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which operation is <b>NOT</b> commutative?',
+      opts:[
+        {t:'+', fb:'Addition is commutative: 2 + 7 = 7 + 2.'},
+        {t:'×', fb:'Multiplication is commutative: 2 × 7 = 7 × 2.'},
+        {t:'÷', ok:true, ex:'2 ÷ 7 ≠ 7 ÷ 2, so division is not commutative.'},
+        {t:'both + and ×', fb:'Both of these ARE commutative.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q11 ---------------- */
+{
+  n:11, unit:2, title:'Comparing decimals',
+  question:`<p>Place either <b>&lt;</b>, <b>=</b> or <b>&gt;</b> between each pair to make the statement true.</p>
+    <div class="cmplist">
+      <div>a)&nbsp; 0.5 &nbsp;<span class="blank">?</span>&nbsp; 0.45</div>
+      <div>b)&nbsp; 2.70 &nbsp;<span class="blank">?</span>&nbsp; 2.7</div>
+      <div>c)&nbsp; 1.09 &nbsp;<span class="blank">?</span>&nbsp; 1.9</div>
+      <div>d)&nbsp; 3.4 &nbsp;<span class="blank">?</span>&nbsp; 3.40</div>
+    </div>`,
+  solution:[
+    `<p><b>Tip:</b> give both numbers the same number of decimal places by writing extra zeros on the end. This does not change the value, but it makes comparing easy.</p>`,
+    `<p><b>a.</b> 0.5 = 0.50, and 0.50 &gt; 0.45 &nbsp;→&nbsp; <b>0.5 &gt; 0.45</b></p>`,
+    `<p><b>b.</b> 2.70 and 2.7 = 2.70, so they are the same &nbsp;→&nbsp; <b>2.70 = 2.7</b></p>`,
+    `<p><b>c.</b> 1.09 and 1.9 = 1.90. Compare the tenths: 0 tenths versus 9 tenths &nbsp;→&nbsp; <b>1.09 &lt; 1.9</b></p>`,
+    `<p><b>d.</b> 3.4 = 3.40 &nbsp;→&nbsp; <b>3.4 = 3.40</b></p>`,
+    `<p class="ans">Answers: a) &gt; &nbsp; b) = &nbsp; c) &lt; &nbsp; d) =</p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Which is the <b>largest</b> number?',
+      opts:[
+        {t:'0.8', fb:'0.8 = 0.80, which is smaller than 0.805.'},
+        {t:'0.75', fb:'0.75 = 0.750, which is smaller than 0.805.'},
+        {t:'0.805', ok:true, ex:'Write them all with three decimals: 0.800, 0.750, 0.805, 0.090. 0.805 is largest.'},
+        {t:'0.09', fb:'0.09 has only 0 tenths, so it is the smallest of the four.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which is the <b>smallest</b> number?',
+      opts:[
+        {t:'1.2', fb:'1.2 = 1.200, which is bigger than 1.02.'},
+        {t:'1.02', ok:true, ex:'1.020 has only 0 tenths, so it is smaller than 1.190 and 1.201.'},
+        {t:'1.19', fb:'1.19 = 1.190, which is bigger than 1.020.'},
+        {t:'1.201', fb:'That is the largest of the four.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which symbol makes <b>3.06 ? 3.6</b> true?',
+      opts:[
+        {t:'&lt;', ok:true, ex:'3.06 has 0 tenths; 3.6 has 6 tenths. So 3.06 &lt; 3.6.'},
+        {t:'&gt;', fb:'A common mistake — 3.06 <i>looks</i> longer, but compare the tenths: 0 tenths is less than 6 tenths.'},
+        {t:'=', fb:'3.06 and 3.60 are not the same value.'},
+        {t:'none of these', fb:'One of the three symbols does work.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Write <b>4.5, 4.45, 4.05</b> in order from <b>smallest to largest</b>.',
+      opts:[
+        {t:'4.05, 4.45, 4.5', ok:true, ex:'4.05 &lt; 4.45 &lt; 4.50. Compare the tenths first, then the hundredths.'},
+        {t:'4.5, 4.45, 4.05', fb:'That is largest to smallest.'},
+        {t:'4.45, 4.05, 4.5', fb:'4.05 is smaller than 4.45, so it comes first.'},
+        {t:'4.05, 4.5, 4.45', fb:'Compare 4.50 and 4.45: 50 hundredths is more than 45 hundredths, so 4.45 comes before 4.5.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q12 ---------------- */
+{
+  n:12, unit:2, title:'Using a known multiplication fact',
+  question:`<p>Given that <b>721 × 7 = 5047</b>, work out:</p>
+   <ol class="parts" type="a">
+     <li>721 × 70</li>
+     <li>0.721 × 7</li>
+   </ol>`,
+  solution:[
+    `<p>We never need to start from scratch — we can <b>adjust</b> the known fact.</p>`,
+    `<p><b>a.</b> 70 is 7 × 10. So 721 × 70 is ten times bigger than 721 × 7.</p>`,
+    `<p>721 × 70 = 5047 × 10 = <b>50 470</b></p>`,
+    `<p><b>b.</b> 0.721 is 721 ÷ 1000. So 0.721 × 7 is one thousandth of 721 × 7.</p>`,
+    `<p>0.721 × 7 = 5047 ÷ 1000 = <b>5.047</b></p>`,
+    `<p class="ans">Answers: a) <b>50 470</b> &nbsp; b) <b>5.047</b></p>`
+  ],
+  tasks:[
+    {title:'Practice (a) · scaling up', steps:[
+      {
+        q:'Given 43 × 6 = 258. The number 60 is 10 times bigger than 6, so 43 × 60 will be…',
+        opts:[
+          {t:'258 ÷ 10', fb:'Multiplying by a bigger number gives a bigger answer, so you scale up.'},
+          {t:'258 × 10', ok:true, ex:'Multiply one factor by 10 and the product is multiplied by 10.'},
+          {t:'258 + 10', fb:'Adding 10 is not the same as multiplying the answer by 10.'},
+          {t:'258 × 100', fb:'60 is 10 times 6, not 100 times 6.'}
+        ]
+      },
+      {
+        q:'So <b>43 × 60 = ?</b>',
+        opts:[
+          {t:'258', fb:'The answer must change — 60 is bigger than 6.'},
+          {t:'2 580', ok:true, ex:'258 × 10 = 2580. Check: 43 × 6 = 258 and 43 × 60 = 2580 ✓'},
+          {t:'25 800', fb:'That is ×100. Multiply by 10, so add just one zero.'},
+          {t:'2.58', fb:'That is dividing by 100 instead of multiplying by 10.'}
+        ]
+      }
+    ]},
+    {title:'Practice (b) · scaling down', steps:[{
+      q:'Given 43 × 6 = 258, work out <b>0.43 × 6</b>.',
+      opts:[
+        {t:'25.8', fb:'0.43 is 43 ÷ 100, so divide the answer by 100, not by 10.'},
+        {t:'2.58', ok:true, ex:'43 ÷ 100 = 0.43, so 258 ÷ 100 = 2.58.'},
+        {t:'0.258', fb:'That would be dividing by 1000 — check: 0.43 has two decimal places.'},
+        {t:'258', fb:'The answer must get smaller, because 0.43 is much smaller than 43.'}
+      ]}]},
+    {title:'Practice · scaling up further', steps:[{
+      q:'Given 721 × 7 = 5047, work out <b>721 × 700</b>.',
+      opts:[
+        {t:'50 470', fb:'That is ×10. 700 is 100 times 7, so multiply by 100.'},
+        {t:'504 700', ok:true, ex:'700 = 7 × 100, so 5047 × 100 = 504 700.'},
+        {t:'5 047 000', fb:'That is ×1000. 700 is 100 times 7.'},
+        {t:'5 047', fb:'The answer must be bigger than 5047.'}
+      ]}]},
+    {title:'Practice · small decimals', steps:[{
+      q:'Given 721 × 7 = 5047, work out <b>0.0721 × 7</b>.',
+      opts:[
+        {t:'5.047', fb:'That is 0.721 × 7 — here the number has four decimal places.'},
+        {t:'0.5047', ok:true, ex:'0.0721 = 721 ÷ 10 000, so 5047 ÷ 10 000 = 0.5047.'},
+        {t:'0.05047', fb:'That is dividing by 100 000 — one zero too many.'},
+        {t:'50.47', fb:'The answer must be smaller than 5.047.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q13 ---------------- */
+{
+  n:13, unit:2, title:'Rearranging to add more easily',
+  question:`<p>Work out the value of the calculation. You can rearrange the expression to make it easier — show how you did it.</p>
+    <p style="font-size:1.15rem;font-weight:700;letter-spacing:.5px">19 + 65 + 71 + 35</p>`,
+  solution:[
+    `<p>Look for pairs that make a "nice" number — pairs that add to a multiple of 10.</p>`,
+    `<p>19 and 71 are a good pair, because 9 + 1 = 10 → 19 + 71 = <b>90</b>.</p>`,
+    `<p>65 and 35 are a good pair, because 5 + 5 = 10 → 65 + 35 = <b>100</b>.</p>`,
+    `<p>So: (19 + 71) + (65 + 35) = 90 + 100</p>`,
+    `<p class="ans">Answer: <b>190</b></p>`,
+    `<p><b>Why it works:</b> addition is commutative and associative — you may swap the order and group the numbers however you like.</p>`
+  ],
+  tasks:[
+    {title:'Practice · rearranging', steps:[
+      {
+        q:'You must work out <b>28 + 46 + 72 + 54</b>. Which grouping makes it easiest?',
+        opts:[
+          {t:'(28 + 46) + (72 + 54)', fb:'These pairs do not make round numbers — look for pairs whose ones digits add to 10.'},
+          {t:'(28 + 72) + (46 + 54)', ok:true, ex:'28 + 72 = 100 and 46 + 54 = 100 — lovely round numbers!'},
+          {t:'(28 + 54) + (46 + 72)', fb:'28 + 54 = 82 and 46 + 72 = 118 — no round numbers here.'},
+          {t:'(28 + 72) − (46 + 54)', fb:'You must keep all four numbers added, not subtract one pair.'}
+        ]
+      },
+      {
+        q:'What is <b>28 + 72</b>?',
+        opts:[
+          {t:'90', fb:'Check: 8 + 2 = 10, so there is a carry into the tens.'},
+          {t:'100', ok:true, ex:'28 + 72 = 100 — the ones digits add to 10.'},
+          {t:'110', fb:'Too big — 30 + 70 = 100, and 28 + 72 is also exactly 100.'},
+          {t:'99', fb:'Check again: 8 + 2 = 10, so the total is a round 100.'}
+        ]
+      },
+      {
+        q:'What is <b>46 + 54</b>?',
+        opts:[
+          {t:'90', fb:'6 + 4 = 10, so the total is a round hundred.'},
+          {t:'100', ok:true, ex:'46 + 54 = 100.'},
+          {t:'110', fb:'Too big — 46 + 54 = 100 exactly.'},
+          {t:'96', fb:'Check: 6 + 4 = 10, giving a carry that makes it 100.'}
+        ]
+      },
+      {
+        q:'So <b>28 + 46 + 72 + 54 = ?</b>',
+        opts:[
+          {t:'190', fb:'Add your two pairs: 100 + 100 = 200.'},
+          {t:'200', ok:true, ex:'(28 + 72) + (46 + 54) = 100 + 100 = 200.'},
+          {t:'210', fb:'Check the pairs — both make exactly 100.'},
+          {t:'220', fb:'Re-add the pairs: 100 + 100 = 200.'}
+        ]
+      }
+    ]},
+    {title:'Practice · your turn', steps:[{
+      q:'Use a clever grouping to work out <b>15 + 37 + 85 + 63</b>.',
+      opts:[
+        {t:'190', fb:'Check the pairs: 15 + 85 = 100 and 37 + 63 = 100.'},
+        {t:'200', ok:true, ex:'(15 + 85) + (37 + 63) = 100 + 100 = 200.'},
+        {t:'210', fb:'Re-add: 100 + 100 = 200.'},
+        {t:'220', fb:'Re-add: 100 + 100 = 200.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q14 ---------------- */
+{
+  n:14, unit:2, title:'Dividing by a single digit',
+  question:`<p>Work out <b>240 ÷ 6</b></p>`,
+  solution:[
+    `<p>Use a fact you already know: 24 ÷ 6 = 4.</p>`,
+    `<p>240 is 24 tens, so 240 ÷ 6 = 4 tens = <b>40</b>.</p>`,
+    `<p><b>Check by multiplying:</b> 40 × 6 = 240 ✓</p>`,
+    `<p class="ans">Answer: <b>40</b></p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Work out <b>360 ÷ 4</b>',
+      opts:[
+        {t:'9', fb:'36 ÷ 4 = 9, but 360 is 36 tens, so the answer is 9 tens = 90.'},
+        {t:'90', ok:true, ex:'36 ÷ 4 = 9, so 360 ÷ 4 = 90. Check: 90 × 4 = 360 ✓'},
+        {t:'900', fb:'Too big — 900 × 4 = 3600.'},
+        {t:'80', fb:'80 × 4 = 320, not 360.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>480 ÷ 6</b>',
+      opts:[
+        {t:'8', fb:'48 ÷ 6 = 8, but 480 is 48 tens, so the answer is 80.'},
+        {t:'80', ok:true, ex:'48 ÷ 6 = 8, so 480 ÷ 6 = 80. Check: 80 × 6 = 480 ✓'},
+        {t:'800', fb:'Too big — 800 × 6 = 4800.'},
+        {t:'70', fb:'70 × 6 = 420, not 480.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>5600 ÷ 7</b>',
+      opts:[
+        {t:'80', fb:'56 ÷ 7 = 8, but 5600 is 56 hundreds, so the answer is 8 hundreds = 800.'},
+        {t:'800', ok:true, ex:'56 ÷ 7 = 8, so 5600 ÷ 7 = 800. Check: 800 × 7 = 5600 ✓'},
+        {t:'8000', fb:'Too big — 8000 × 7 = 56 000.'},
+        {t:'700', fb:'700 × 7 = 4900, not 5600.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Work out <b>720 ÷ 9</b>',
+      opts:[
+        {t:'8', fb:'72 ÷ 9 = 8, but 720 is 72 tens, so the answer is 80.'},
+        {t:'80', ok:true, ex:'72 ÷ 9 = 8, so 720 ÷ 9 = 80. Check: 80 × 9 = 720 ✓'},
+        {t:'800', fb:'Too big — 800 × 9 = 7200.'},
+        {t:'90', fb:'90 × 9 = 810, not 720.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q15 ---------------- */
+{
+  n:15, unit:2, title:'Multiplying by a single digit (partitioning)',
+  question:`<p>Work out <b>9 × 31</b>. You must show your working.</p>`,
+  solution:[
+    `<p>Partition 31 into 30 + 1.</p>`,
+    `<p>9 × 30 = <b>270</b> &nbsp; (because 9 × 3 = 27, so 9 × 30 = 270)</p>`,
+    `<p>9 × 1 = <b>9</b></p>`,
+    `<p>Add the two parts: 270 + 9 = <b>279</b></p>`,
+    `<p class="ans">Answer: <b>279</b></p>`
+  ],
+  tasks:[
+    {title:'Practice · partitioning', steps:[
+      {
+        q:'To work out 7 × 43, split 43 into 40 + 3. What is <b>7 × 40</b>?',
+        opts:[
+          {t:'28', fb:'7 × 4 = 28, but 40 is ten times bigger than 4, so the answer is ten times bigger.'},
+          {t:'280', ok:true, ex:'7 × 4 = 28, then ×10 gives 280.'},
+          {t:'2800', fb:'Too big — 7 × 40 is 7 × 4 with one zero: 280.'},
+          {t:'240', fb:'That is 6 × 40. Check: 7 × 4 = 28.'}
+        ]
+      },
+      {
+        q:'What is <b>7 × 3</b>?',
+        opts:[
+          {t:'21', ok:true, ex:'7 × 3 = 21.'},
+          {t:'24', fb:'That is 8 × 3. Check your 7 times table.'},
+          {t:'18', fb:'That is 6 × 3.'},
+          {t:'10', fb:'That is 7 + 3 — you need to multiply.'}
+        ]
+      },
+      {
+        q:'Now add the two parts: <b>280 + 21 = ?</b>',
+        opts:[
+          {t:'301', ok:true, ex:'280 + 21 = 301, so 7 × 43 = 301.'},
+          {t:'291', fb:'Check the ones: 0 + 1 = 1, and 8 + 2 = 10, so it is 301.'},
+          {t:'211', fb:'You must add 280, not just 200.'},
+          {t:'302', fb:'Check the ones column: 0 + 1 = 1.'}
+        ]
+      }
+    ]},
+    {title:'Practice · another one', steps:[{
+      q:'Work out <b>6 × 58</b> using partitioning (58 = 50 + 8).',
+      opts:[
+        {t:'348', ok:true, ex:'6 × 50 = 300 and 6 × 8 = 48, so 300 + 48 = 348.'},
+        {t:'358', fb:'Check 6 × 8 = 48, so the ones digit is 8 — and 300 + 48 = 348.'},
+        {t:'338', fb:'Check 6 × 8: it is 48, not 38.'},
+        {t:'308', fb:'You have forgotten the 6 × 8 part entirely.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q16 ---------------- */
+{
+  n:16, unit:2, title:'Multiplying two-digit numbers',
+  question:`<p>Work out <b>19 × 47</b>. You must show your working.</p>`,
+  solution:[
+    `<p>19 is very close to 20, so use <b>20 lots of 47 and subtract one lot</b>.</p>`,
+    `<p>20 × 47 = <b>940</b> &nbsp; (because 2 × 47 = 94, then ×10)</p>`,
+    `<p>But we only want 19 lots, so subtract 1 lot of 47: 940 − 47</p>`,
+    `<p>940 − 47 = <b>893</b></p>`,
+    `<p class="ans">Answer: <b>893</b></p>`,
+    `<p><b>Alternative:</b> 19 × 47 = 19 × 40 + 19 × 7 = 760 + 133 = 893 ✓</p>`
+  ],
+  tasks:[
+    {title:'Practice · using a near number', steps:[
+      {
+        q:'21 × 38 is 20 lots of 38 plus 1 more lot of 38. What is <b>20 × 38</b>?',
+        opts:[
+          {t:'760', ok:true, ex:'2 × 38 = 76, so 20 × 38 = 760.'},
+          {t:'380', fb:'That is 10 × 38. You need 20 lots.'},
+          {t:'7600', fb:'That is 200 × 38 — one zero too many.'},
+          {t:'720', fb:'Check 2 × 38 = 76, so 20 × 38 = 760.'}
+        ]
+      },
+      {
+        q:'Now add the extra lot: <b>760 + 38 = ?</b>',
+        opts:[
+          {t:'798', ok:true, ex:'760 + 38 = 798, so 21 × 38 = 798.'},
+          {t:'782', fb:'Check the ones: 0 + 8 = 8 and 6 + 3 = 9, so it is 798.'},
+          {t:'788', fb:'Check the tens: 6 + 3 = 9, giving 798.'},
+          {t:'808', fb:'Check the tens column — no carry is needed here.'}
+        ]
+      }
+    ]},
+    {title:'Practice · your turn', steps:[{
+      q:'Work out <b>19 × 24</b> by doing 20 × 24 and subtracting 24.',
+      opts:[
+        {t:'480', fb:'That is 20 × 24 — but we only want 19 lots, so subtract one more 24.'},
+        {t:'456', ok:true, ex:'20 × 24 = 480, then 480 − 24 = 456.'},
+        {t:'444', fb:'Check: 480 − 24 = 456.'},
+        {t:'466', fb:'Check: 480 − 24 = 456.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q17 ---------------- */
+{
+  n:17, unit:3, title:'Multiples',
+  question:`<p>Write the <b>fourth multiple</b> of 9.</p>`,
+  solution:[
+    `<p>Multiples of 9 are what you get in the 9 times table: 9, 18, 27, 36, 45, …</p>`,
+    `<p>Count them off:</p>
+     <table class="pv">
+       <tr><th>1st</th><th>2nd</th><th>3rd</th><th>4th</th></tr>
+       <tr><td>9</td><td>18</td><td>27</td><td><b>36</b></td></tr>
+     </table>`,
+    `<p>You can also just work out 9 × 4 = 36.</p>`,
+    `<p class="ans">Answer: <b>36</b></p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'What is the <b>4th multiple</b> of 6?',
+      opts:[
+        {t:'18', fb:'That is the 3rd multiple (6, 12, <b>18</b>).'},
+        {t:'24', ok:true, ex:'6, 12, 18, 24 — the 4th multiple is 24 (which is 6 × 4).'},
+        {t:'30', fb:'That is the 5th multiple.'},
+        {t:'36', fb:'That is the 6th multiple.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'What is the <b>3rd multiple</b> of 7?',
+      opts:[
+        {t:'14', fb:'That is the 2nd multiple (7, 14, …).'},
+        {t:'21', ok:true, ex:'7, 14, 21 — the 3rd multiple is 21 (7 × 3).'},
+        {t:'28', fb:'That is the 4th multiple.'},
+        {t:'24', fb:'24 is not in the 7 times table at all.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'What is the <b>5th multiple</b> of 8?',
+      opts:[
+        {t:'32', fb:'That is the 4th multiple (8, 16, 24, 32).'},
+        {t:'40', ok:true, ex:'8, 16, 24, 32, 40 — the 5th multiple is 40 (8 × 5).'},
+        {t:'48', fb:'That is the 6th multiple.'},
+        {t:'45', fb:'45 is not a multiple of 8.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'What is the <b>6th multiple</b> of 5?',
+      opts:[
+        {t:'25', fb:'That is the 5th multiple.'},
+        {t:'30', ok:true, ex:'5, 10, 15, 20, 25, 30 — the 6th multiple is 30 (5 × 6).'},
+        {t:'35', fb:'That is the 7th multiple.'},
+        {t:'11', fb:'That is 5 + 6 — multiples come from multiplying, not adding.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q18 ---------------- */
+{
+  n:18, unit:3, title:'Factors',
+  question:`<p>List <b>all</b> the factors of 20.</p>`,
+  solution:[
+    `<p>A factor is a whole number that divides exactly into 20 with no remainder.</p>`,
+    `<p>Work in pairs, starting from 1:</p>
+     <table class="pv">
+       <tr><th>1 × 20</th><th>2 × 10</th><th>3 × ?</th><th>4 × 5</th></tr>
+       <tr><td>1 and 20</td><td>2 and 10</td><td>20 ÷ 3 is not whole</td><td>4 and 5</td></tr>
+     </table>`,
+    `<p>Once the pairs meet in the middle, you have them all.</p>`,
+    `<p class="ans">Answer: <b>1, 2, 4, 5, 10, 20</b> &nbsp;(six factors)</p>`,
+    `<p><b>Remember:</b> 1 and the number itself are always factors.</p>`
+  ],
+  tasks:[
+    {title:'Practice · listing factors', steps:[{
+      q:'Which list shows <b>all</b> the factors of 24?',
+      opts:[
+        {t:'1, 2, 3, 4, 6, 8, 12, 24', ok:true, ex:'All eight factors: 1×24, 2×12, 3×8, 4×6.'},
+        {t:'1, 2, 3, 4, 6, 12, 24', fb:'You have missed 8, because 8 × 3 = 24.'},
+        {t:'2, 3, 4, 6, 8, 12', fb:'You have missed 1 and 24 — they are always factors.'},
+        {t:'1, 2, 4, 6, 8, 24', fb:'3 and 12 are missing, because 3 × 8 = 24 and 12 × 2 = 24.'}
+      ]}]},
+    {title:'Practice · counting factors', steps:[{
+      q:'How many factors does 16 have?',
+      opts:[
+        {t:'4', fb:'You have missed one — 16 ÷ 4 = 4, and 16 itself is a factor too.'},
+        {t:'5', ok:true, ex:'1, 2, 4, 8, 16 — five factors.'},
+        {t:'6', fb:'There are only five: 1, 2, 4, 8, 16.'},
+        {t:'8', fb:'Eight is a factor, but there are not eight factors in total.'}
+      ]}]},
+    {title:'Practice · spotting a non-factor', steps:[{
+      q:'Which of these is <b>NOT</b> a factor of 36?',
+      opts:[
+        {t:'4', fb:'36 ÷ 4 = 9 exactly, so 4 IS a factor.'},
+        {t:'6', fb:'36 ÷ 6 = 6 exactly, so 6 IS a factor.'},
+        {t:'8', ok:true, ex:'36 ÷ 8 = 4.5, which is not a whole number, so 8 is not a factor.'},
+        {t:'9', fb:'36 ÷ 9 = 4 exactly, so 9 IS a factor.'}
+      ]}]},
+    {title:'Practice · common factors', steps:[{
+      q:'Which of these is <b>NOT</b> a common factor of 18 and 27?',
+      opts:[
+        {t:'1', fb:'1 divides everything, so it is a common factor.'},
+        {t:'3', fb:'18 ÷ 3 = 6 and 27 ÷ 3 = 9, so 3 IS a common factor.'},
+        {t:'6', ok:true, ex:'18 ÷ 6 = 3, but 27 ÷ 6 = 4.5 — so 6 does not divide 27.'},
+        {t:'9', fb:'18 ÷ 9 = 2 and 27 ÷ 9 = 3, so 9 IS a common factor.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q19 ---------------- */
+{
+  n:19, unit:3, title:'Highest common factor (HCF)',
+  question:`<p>Find the <b>highest common factor</b> of 18 and 30.</p>`,
+  solution:[
+    `<p><b>Method 1 — list the factors.</b></p>
+     <table class="pv">
+       <tr><th>Factors of 18</th><td>1, 2, 3, 6, 9, 18</td></tr>
+       <tr><th>Factors of 30</th><td>1, 2, 3, 5, 6, 10, 15, 30</td></tr>
+     </table>`,
+    `<p>The common factors are 1, 2, 3 and 6 — the highest of these is <b>6</b>.</p>`,
+    `<p><b>Method 2 — prime factors.</b> 18 = 2 × 3 × 3 and 30 = 2 × 3 × 5.</p>`,
+    `<p>The primes they share are 2 and 3, so HCF = 2 × 3 = 6.</p>`,
+    `<p class="ans">Answer: <b>6</b></p>`
+  ],
+  tasks:[
+    {title:'Practice · finding the HCF', steps:[
+      {
+        q:'The factors of 24 are 1, 2, 3, 4, 6, 8, 12, 24. Which of these is <b>NOT</b> a factor of 36?',
+        opts:[
+          {t:'4', fb:'36 ÷ 4 = 9, so 4 IS a factor of 36.'},
+          {t:'6', fb:'36 ÷ 6 = 6, so 6 IS a factor of 36.'},
+          {t:'8', ok:true, ex:'36 ÷ 8 = 4.5 — not a whole number, so 8 is not a factor of 36.'},
+          {t:'12', fb:'36 ÷ 12 = 3, so 12 IS a factor of 36.'}
+        ]
+      },
+      {
+        q:'The common factors of 24 and 36 are 1, 2, 3, 4, 6, 12. What is the <b>highest common factor</b>?',
+        opts:[
+          {t:'3', fb:'3 is a common factor, but it is not the highest one.'},
+          {t:'4', fb:'4 is a common factor, but 6 and 12 are bigger.'},
+          {t:'6', fb:'6 is a common factor, but 12 is bigger and still divides both.'},
+          {t:'12', ok:true, ex:'12 is the largest number in both lists, so HCF(24, 36) = 12.'}
+        ]
+      }
+    ]},
+    {title:'Practice', steps:[{
+      q:'Find the HCF of <b>16 and 40</b>.',
+      opts:[
+        {t:'2', fb:'2 is a common factor, but it is far from the highest.'},
+        {t:'4', fb:'4 divides both, but 8 does too and is bigger.'},
+        {t:'8', ok:true, ex:'Factors of 16: 1,2,4,8,16. Factors of 40: 1,2,4,5,8,10,20,40. The highest common one is 8.'},
+        {t:'16', fb:'16 does not divide 40 (40 ÷ 16 = 2.5).'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Find the HCF of <b>20 and 45</b>.',
+      opts:[
+        {t:'1', fb:'They do share a bigger factor — try the 5 times table.'},
+        {t:'5', ok:true, ex:'Factors of 20: 1,2,4,5,10,20. Factors of 45: 1,3,5,9,15,45. The highest common factor is 5.'},
+        {t:'9', fb:'9 is not a factor of 20.'},
+        {t:'15', fb:'15 is not a factor of 20.'}
+      ]}]},
+    {title:'Practice · a tricky one', steps:[{
+      q:'Find the HCF of <b>15 and 28</b>.',
+      opts:[
+        {t:'1', ok:true, ex:'15 = 3 × 5 and 28 = 2 × 2 × 7. They share no prime factors, so the HCF is 1.'},
+        {t:'3', fb:'3 divides 15, but 28 ÷ 3 = 9.33… so it is not a factor of 28.'},
+        {t:'7', fb:'7 divides 28, but 15 ÷ 7 is not a whole number.'},
+        {t:'2', fb:'2 divides 28, but 15 is odd so 2 does not divide it.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q20 ---------------- */
+{
+  n:20, unit:3, title:'Divisibility by 3',
+  question:`<p>Circle all the numbers that are <b>divisible by 3</b>.</p>
+    <div class="chiprow">
+      <span class="chip">12</span><span class="chip">25</span><span class="chip">39</span>
+      <span class="chip">42</span><span class="chip">51</span><span class="chip">64</span>
+      <span class="chip">87</span><span class="chip">100</span>
+    </div>`,
+  solution:[
+    `<p><b>Rule:</b> a number is divisible by 3 if its digits add up to a multiple of 3.</p>`,
+    `<table class="pv">
+       <tr><th>Number</th><th>Digit sum</th><th>Multiple of 3?</th></tr>
+       <tr><td>12</td><td>1 + 2 = 3</td><td>✓ yes</td></tr>
+       <tr><td>25</td><td>2 + 5 = 7</td><td>✗ no</td></tr>
+       <tr><td>39</td><td>3 + 9 = 12</td><td>✓ yes</td></tr>
+       <tr><td>42</td><td>4 + 2 = 6</td><td>✓ yes</td></tr>
+       <tr><td>51</td><td>5 + 1 = 6</td><td>✓ yes</td></tr>
+       <tr><td>64</td><td>6 + 4 = 10</td><td>✗ no</td></tr>
+       <tr><td>87</td><td>8 + 7 = 15</td><td>✓ yes</td></tr>
+       <tr><td>100</td><td>1 + 0 + 0 = 1</td><td>✗ no</td></tr>
+     </table>`,
+    `<p class="ans">Answer: <b>12, 39, 42, 51, 87</b></p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Which number is divisible by 3?',
+      opts:[
+        {t:'41', fb:'4 + 1 = 5, which is not a multiple of 3.'},
+        {t:'52', fb:'5 + 2 = 7, not a multiple of 3.'},
+        {t:'63', ok:true, ex:'6 + 3 = 9, which is a multiple of 3, so 63 ÷ 3 = 21.'},
+        {t:'74', fb:'7 + 4 = 11, not a multiple of 3.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which number is divisible by 3?',
+      opts:[
+        {t:'112', fb:'1 + 1 + 2 = 4, not a multiple of 3.'},
+        {t:'121', fb:'1 + 2 + 1 = 4, not a multiple of 3.'},
+        {t:'130', fb:'1 + 3 + 0 = 4, not a multiple of 3.'},
+        {t:'141', ok:true, ex:'1 + 4 + 1 = 6, a multiple of 3, so 141 ÷ 3 = 47.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which number is <b>NOT</b> divisible by 3?',
+      opts:[
+        {t:'27', fb:'2 + 7 = 9, so 27 IS divisible by 3.'},
+        {t:'45', fb:'4 + 5 = 9, so 45 IS divisible by 3.'},
+        {t:'56', ok:true, ex:'5 + 6 = 11, which is not a multiple of 3, so 56 is not divisible by 3.'},
+        {t:'72', fb:'7 + 2 = 9, so 72 IS divisible by 3.'}
+      ]}]},
+    {title:'Practice · two rules at once', steps:[{
+      q:'Which number is divisible by <b>both 2 and 3</b>?',
+      opts:[
+        {t:'34', fb:'It is even, but 3 + 4 = 7 so it is not divisible by 3.'},
+        {t:'42', ok:true, ex:'42 is even (÷2 = 21) and 4 + 2 = 6 (÷3 = 14).'},
+        {t:'51', fb:'5 + 1 = 6 so it is divisible by 3, but 51 is odd so it is not divisible by 2.'},
+        {t:'63', fb:'Divisible by 3, but not even, so not divisible by 2.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q21 ---------------- */
+{
+  n:21, unit:3, title:'Square numbers',
+  question:`<p>Circle all the <b>square numbers</b> from the list below.</p>
+    <div class="chiprow">
+      <span class="chip">1</span><span class="chip">12</span><span class="chip">16</span>
+      <span class="chip">25</span><span class="chip">40</span><span class="chip">49</span>
+      <span class="chip">60</span><span class="chip">81</span><span class="chip">90</span><span class="chip">100</span>
+    </div>`,
+  solution:[
+    `<p>A square number is made by multiplying a whole number by itself: 1×1, 2×2, 3×3, …</p>`,
+    `<p>The square numbers are: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, …</p>`,
+    `<p>Now check the list:</p>
+     <table class="pv">
+       <tr><th>In the list</th><th>Square?</th><th>Why</th></tr>
+       <tr><td>1</td><td>✓</td><td>1 × 1</td></tr>
+       <tr><td>12</td><td>✗</td><td>between 9 and 16</td></tr>
+       <tr><td>16</td><td>✓</td><td>4 × 4</td></tr>
+       <tr><td>25</td><td>✓</td><td>5 × 5</td></tr>
+       <tr><td>40</td><td>✗</td><td>between 36 and 49</td></tr>
+       <tr><td>49</td><td>✓</td><td>7 × 7</td></tr>
+       <tr><td>60</td><td>✗</td><td>between 49 and 64</td></tr>
+       <tr><td>81</td><td>✓</td><td>9 × 9</td></tr>
+       <tr><td>90</td><td>✗</td><td>between 81 and 100</td></tr>
+       <tr><td>100</td><td>✓</td><td>10 × 10</td></tr>
+     </table>`,
+    `<p class="ans">Answer: <b>1, 16, 25, 49, 81, 100</b></p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Which of these is a square number?',
+      opts:[
+        {t:'20', fb:'16 and 25 are the squares either side of 20.'},
+        {t:'24', fb:'25 is the nearest square — 24 is not a square.'},
+        {t:'25', ok:true, ex:'25 = 5 × 5, so it is a square number.'},
+        {t:'26', fb:'Not a square — the squares near it are 25 and 36.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which of these is a square number?',
+      opts:[
+        {t:'30', fb:'25 and 36 are the nearest squares.'},
+        {t:'33', fb:'Not a square — no whole number times itself gives 33.'},
+        {t:'36', ok:true, ex:'36 = 6 × 6, so it is a square number.'},
+        {t:'40', fb:'36 and 49 are the nearest squares.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which of these is <b>NOT</b> a square number?',
+      opts:[
+        {t:'49', fb:'49 = 7 × 7, so it IS a square number.'},
+        {t:'64', fb:'64 = 8 × 8, so it IS a square number.'},
+        {t:'70', ok:true, ex:'64 and 81 are the squares either side, so 70 is not a square.'},
+        {t:'81', fb:'81 = 9 × 9, so it IS a square number.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'What is the <b>next</b> square number after 49?',
+      opts:[
+        {t:'50', fb:'That is just 49 + 1. Square numbers come from multiplying a number by itself.'},
+        {t:'64', ok:true, ex:'49 = 7 × 7, so the next is 8 × 8 = 64.'},
+        {t:'81', fb:'81 = 9 × 9 — you have skipped 8 × 8 = 64.'},
+        {t:'56', fb:'Not a square number.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q22 ---------------- */
+{
+  n:22, unit:3, title:'Prime numbers',
+  question:`<p>Circle all the <b>prime numbers</b> from the list below.</p>
+    <div class="chiprow">
+      <span class="chip">1</span><span class="chip">2</span><span class="chip">9</span>
+      <span class="chip">11</span><span class="chip">15</span><span class="chip">21</span>
+      <span class="chip">23</span><span class="chip">27</span><span class="chip">29</span><span class="chip">33</span>
+    </div>`,
+  solution:[
+    `<p>A <b>prime</b> number has <b>exactly two</b> factors: 1 and itself.</p>`,
+    `<p><b>1 is not prime</b> — it has only one factor (itself).</p>`,
+    `<table class="pv">
+       <tr><th>Number</th><th>Factors</th><th>Prime?</th></tr>
+       <tr><td>1</td><td>1</td><td>✗ only one factor</td></tr>
+       <tr><td>2</td><td>1, 2</td><td>✓ (the only even prime)</td></tr>
+       <tr><td>9</td><td>1, 3, 9</td><td>✗</td></tr>
+       <tr><td>11</td><td>1, 11</td><td>✓</td></tr>
+       <tr><td>15</td><td>1, 3, 5, 15</td><td>✗</td></tr>
+       <tr><td>21</td><td>1, 3, 7, 21</td><td>✗</td></tr>
+       <tr><td>23</td><td>1, 23</td><td>✓</td></tr>
+       <tr><td>27</td><td>1, 3, 9, 27</td><td>✗</td></tr>
+       <tr><td>29</td><td>1, 29</td><td>✓</td></tr>
+       <tr><td>33</td><td>1, 3, 11, 33</td><td>✗</td></tr>
+     </table>`,
+    `<p class="ans">Answer: <b>2, 11, 23, 29</b></p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Which of these is a prime number?',
+      opts:[
+        {t:'9', fb:'9 = 3 × 3, so it has three factors (1, 3, 9). Not prime.'},
+        {t:'15', fb:'15 = 3 × 5, so it has four factors. Not prime.'},
+        {t:'21', fb:'21 = 3 × 7. Not prime.'},
+        {t:'23', ok:true, ex:'23 has only two factors, 1 and 23, so it is prime.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which of these is <b>NOT</b> a prime number?',
+      opts:[
+        {t:'2', fb:'2 is prime — it is the only even prime number.'},
+        {t:'11', fb:'11 has only factors 1 and 11, so it IS prime.'},
+        {t:'21', ok:true, ex:'21 = 3 × 7, so it has four factors (1, 3, 7, 21). Not prime.'},
+        {t:'31', fb:'31 has only factors 1 and 31, so it IS prime.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which of these is a prime number?',
+      opts:[
+        {t:'1', fb:'1 has only ONE factor, so it does not have "exactly two" — 1 is not prime.'},
+        {t:'27', fb:'27 = 3 × 9, so it is not prime.'},
+        {t:'29', ok:true, ex:'29 has only two factors, 1 and 29.'},
+        {t:'33', fb:'33 = 3 × 11, so it is not prime.'}
+      ]}]},
+    {title:'Practice · counting primes', steps:[{
+      q:'How many prime numbers are there between 10 and 20?',
+      opts:[
+        {t:'3', fb:'You have missed one — check 19 as well as 11, 13 and 17.'},
+        {t:'4', ok:true, ex:'11, 13, 17 and 19 are all prime — that is four.'},
+        {t:'5', fb:'Only four of them are prime; 15 = 3 × 5 is not.'},
+        {t:'6', fb:'There are only four primes in that range.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q23 ---------------- */
+{
+  n:23, unit:3, title:'Factors of 30',
+  question:`<p>Circle all the numbers from the list below that are <b>factors of 30</b>.</p>
+    <div class="chiprow">
+      <span class="chip">1</span><span class="chip">2</span><span class="chip">3</span>
+      <span class="chip">4</span><span class="chip">5</span><span class="chip">6</span>
+      <span class="chip">10</span><span class="chip">12</span><span class="chip">15</span>
+      <span class="chip">20</span><span class="chip">30</span>
+    </div>`,
+  solution:[
+    `<p>Test each number by dividing it into 30 — a factor leaves no remainder.</p>
+    <table class="pv">
+      <tr><th>Number</th><th>30 ÷ number</th><th>Factor?</th></tr>
+      <tr><td>1</td><td>30</td><td>✓</td></tr>
+      <tr><td>2</td><td>15</td><td>✓</td></tr>
+      <tr><td>3</td><td>10</td><td>✓</td></tr>
+      <tr><td>4</td><td>7.5</td><td>✗</td></tr>
+      <tr><td>5</td><td>6</td><td>✓</td></tr>
+      <tr><td>6</td><td>5</td><td>✓</td></tr>
+      <tr><td>10</td><td>3</td><td>✓</td></tr>
+      <tr><td>12</td><td>2.5</td><td>✗</td></tr>
+      <tr><td>15</td><td>2</td><td>✓</td></tr>
+      <tr><td>20</td><td>1.5</td><td>✗</td></tr>
+      <tr><td>30</td><td>1</td><td>✓</td></tr>
+    </table>`,
+    `<p class="ans">Answer: <b>1, 2, 3, 5, 6, 10, 15, 30</b> — eight factors</p>`
+  ],
+  tasks:[
+    {title:'Practice', steps:[{
+      q:'Which of these is a factor of 30?',
+      opts:[
+        {t:'4', fb:'30 ÷ 4 = 7.5, which is not a whole number.'},
+        {t:'7', fb:'30 ÷ 7 is not a whole number (7 × 4 = 28, 7 × 5 = 35).'},
+        {t:'9', fb:'30 ÷ 9 is not a whole number (9 × 3 = 27).'},
+        {t:'10', ok:true, ex:'30 ÷ 10 = 3 exactly, so 10 is a factor.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which of these is <b>NOT</b> a factor of 30?',
+      opts:[
+        {t:'2', fb:'30 ÷ 2 = 15, so 2 IS a factor.'},
+        {t:'5', fb:'30 ÷ 5 = 6, so 5 IS a factor.'},
+        {t:'6', fb:'30 ÷ 6 = 5, so 6 IS a factor.'},
+        {t:'8', ok:true, ex:'30 ÷ 8 = 3.75, so 8 is not a factor.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Which pair are <b>both</b> factors of 30?',
+      opts:[
+        {t:'4 and 5', fb:'4 is not a factor of 30 (30 ÷ 4 = 7.5).'},
+        {t:'6 and 9', fb:'9 is not a factor of 30.'},
+        {t:'10 and 15', ok:true, ex:'30 ÷ 10 = 3 and 30 ÷ 15 = 2 — both are factors.'},
+        {t:'12 and 15', fb:'12 is not a factor of 30 (30 ÷ 12 = 2.5).'}
+      ]}]},
+    {title:'Practice · counting', steps:[{
+      q:'How many factors does 30 have?',
+      opts:[
+        {t:'6', fb:'You have missed some — remember 1 and 30 are always factors.'},
+        {t:'7', fb:'Almost — check your list against 1, 2, 3, 5, 6, 10, 15, 30.'},
+        {t:'8', ok:true, ex:'1, 2, 3, 5, 6, 10, 15, 30 — that is eight factors.'},
+        {t:'10', fb:'Too many — there are only eight.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q24 ---------------- */
+{
+  n:24, unit:3, title:'Square numbers and sums of squares',
+  question:`<p>Write the value of:</p>
+   <ol class="parts" type="a">
+     <li>9²</li>
+     <li>12²</li>
+     <li>Write two square numbers that sum to make 250.</li>
+   </ol>`,
+  solution:[
+    `<p><b>a.</b> 9² means 9 × 9. Picture a 9 by 9 square of dots:</p>` + squareGrid(9,9) +
+    `<p>9 × 9 = <b>81</b></p>`,
+    `<p><b>b.</b> 12² means 12 × 12 = <b>144</b>.</p>`,
+    `<p><b>c.</b> List the square numbers: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225.</p>`,
+    `<p>Look for two that add to 250. Try the biggest square below 250, which is 225 (15²): 250 − 225 = 25, and 25 = 5² ✓</p>`,
+    `<p>There is a second answer: 250 − 169 = 81, and 81 = 9² ✓</p>`,
+    `<p class="ans">Answers: a) <b>81</b> &nbsp; b) <b>144</b> &nbsp; c) <b>225 + 25</b> (15² + 5²) or <b>169 + 81</b> (13² + 9²)</p>`
+  ],
+  tasks:[
+    {title:'Practice (a)', steps:[{
+      q:'What is <b>7²</b>?',
+      opts:[
+        {t:'14', fb:'That is 7 × 2. Squaring means multiplying the number by itself.'},
+        {t:'49', ok:true, ex:'7² = 7 × 7 = 49.'},
+        {t:'77', fb:'That is two 7s written side by side, not 7 × 7.'},
+        {t:'21', fb:'That is 7 + 7 + 7. Squaring is multiplying by itself.'}
+      ]}]},
+    {title:'Practice (b)', steps:[{
+      q:'What is <b>11²</b>?',
+      opts:[
+        {t:'22', fb:'That is 11 × 2. Squaring means 11 × 11.'},
+        {t:'111', fb:'That is just the digit 1 written three times.'},
+        {t:'121', ok:true, ex:'11 × 11 = 121.'},
+        {t:'144', fb:'That is 12², not 11².'}
+      ]}]},
+    {title:'Practice (c) · sums of squares', steps:[
+      {
+        q:'We want two square numbers that add to 100. Which of these is a square number below 100?',
+        opts:[
+          {t:'80', fb:'80 is between 64 and 81, so it is not a square.'},
+          {t:'81', ok:true, ex:'81 = 9 × 9, so it is a square number.'},
+          {t:'90', fb:'90 is between 81 and 100, so it is not a square.'},
+          {t:'99', fb:'99 is not a square — the next square after 81 is 100.'}
+        ]
+      },
+      {
+        q:'100 − 81 = 19, and 19 is not square. Which square, subtracted from 100, <b>leaves</b> a square?',
+        opts:[
+          {t:'64', ok:true, ex:'100 − 64 = 36, and 36 = 6². So 64 + 36 = 100.'},
+          {t:'60', fb:'60 is not a square number.'},
+          {t:'50', fb:'50 is not a square number.'},
+          {t:'70', fb:'70 is not a square number.'}
+        ]
+      },
+      {
+        q:'So which two square numbers add to make 100?',
+        opts:[
+          {t:'36 and 64', ok:true, ex:'36 = 6² and 64 = 8², and 36 + 64 = 100.'},
+          {t:'81 and 19', fb:'19 is not a square number.'},
+          {t:'25 and 75', fb:'75 is not a square number.'},
+          {t:'49 and 51', fb:'51 is not a square number.'}
+        ]
+      }
+    ]}
+  ]
+},
+
+/* ---------------- Q25  (prime factor tree method) ---------------- */
+{
+  n:25, unit:3, title:'Prime factorisation',
+  question:`<p>Write <b>80</b> as a product of prime factors.</p>`,
+  solution:[
+    `<p><b>Method — a prime factor tree.</b> Split the number into any two factors, then keep splitting every composite number until each branch ends in a <b>prime</b>.</p>`,
+    `<p>Start with 80 = 2 × 40:</p>` + factorTree80(),
+    `<p><b>Following each branch:</b><br>
+        • 2 is prime — that branch stops.<br>
+        • 40 → 2 × 20, and 2 is prime.<br>
+        • 20 → 2 × 10, and 2 is prime.<br>
+        • 10 → 2 × 5, and both 2 and 5 are prime.</p>`,
+    `<p>Every branch now ends in a prime (the green circles). Read the primes off the ends of the branches: <b>2, 2, 2, 2, 5</b>.</p>`,
+    `<p>So 80 = 2 × 2 × 2 × 2 × 5.</p>`,
+    `<p class="ans">Answer: <b>80 = 2 × 2 × 2 × 2 × 5</b> &nbsp;(which can be written 2⁴ × 5)</p>`,
+    `<p><b>Check:</b> 2 × 2 × 2 × 2 = 16, and 16 × 5 = 80 ✓</p>`,
+    `<p><b>Why the tree is safe:</b> a different first split, say 80 = 8 × 10, gives the same primes — 8 = 2 × 2 × 2 and 10 = 2 × 5 — so the answer never depends on the branches you choose.</p>`
+  ],
+  tasks:[
+    {title:'Practice · building a prime factorisation', steps:[
+      {
+        q:'What is the <b>smallest prime</b> number that divides 60?',
+        opts:[
+          {t:'2', ok:true, ex:'60 is even, so 2 divides it. 2 is the smallest prime.'},
+          {t:'3', fb:'3 does divide 60, but 2 is smaller and also divides it.'},
+          {t:'5', fb:'5 divides 60, but 2 and 3 are smaller.'},
+          {t:'6', fb:'6 is not prime — it has factors 1, 2, 3 and 6.'}
+        ]
+      },
+      {
+        q:'60 ÷ 2 = 30. What is the smallest prime that divides <b>30</b>?',
+        opts:[
+          {t:'2', ok:true, ex:'30 is even, so 2 divides it.'},
+          {t:'3', fb:'3 does divide 30, but 2 is smaller and also works.'},
+          {t:'5', fb:'5 divides 30, but 2 works and is smaller.'},
+          {t:'15', fb:'15 is not prime.'}
+        ]
+      },
+      {
+        q:'30 ÷ 2 = 15, and 15 ÷ 3 = 5, which is prime. So <b>60 = ?</b>',
+        opts:[
+          {t:'2 × 2 × 3 × 5', ok:true, ex:'60 = 2 × 30 = 2 × 2 × 15 = 2 × 2 × 3 × 5. All of these are prime.'},
+          {t:'2 × 3 × 5', fb:'That is only 30. You need one more 2.'},
+          {t:'2 × 2 × 15', fb:'15 is not prime — split it into 3 × 5.'},
+          {t:'4 × 3 × 5', fb:'4 is not prime — split it into 2 × 2.'}
+        ]
+      }
+    ]},
+    {title:'Practice', steps:[{
+      q:'Write <b>90</b> as a product of prime factors.',
+      opts:[
+        {t:'2 × 3 × 3 × 5', ok:true, ex:'90 = 2 × 45 = 2 × 3 × 15 = 2 × 3 × 3 × 5. Check: 2 × 9 × 5 = 90 ✓'},
+        {t:'2 × 3 × 5', fb:'That is 30, not 90 — you need an extra 3.'},
+        {t:'9 × 2 × 5', fb:'9 is not prime — write it as 3 × 3.'},
+        {t:'2 × 2 × 3 × 5', fb:'That gives 60, not 90.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Write <b>84</b> as a product of prime factors.',
+      opts:[
+        {t:'2 × 2 × 3 × 7', ok:true, ex:'84 = 2 × 42 = 2 × 2 × 21 = 2 × 2 × 3 × 7. Check: 4 × 21 = 84 ✓'},
+        {t:'2 × 3 × 7', fb:'That is 42 — you have halved it once too often.'},
+        {t:'4 × 3 × 7', fb:'4 is not prime — write it as 2 × 2.'},
+        {t:'2 × 2 × 21', fb:'21 is not prime — split it into 3 × 7.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q26  (prime factors + Venn diagram) ---------------- */
+{
+  n:26, unit:3, title:'Lowest common multiple (LCM)',
+  question:`<p>Find the <b>lowest common multiple (LCM)</b> of 12 and 28. You must show your working.</p>`,
+  solution:[
+    `<p><b>Step 1 — write both numbers as products of prime factors.</b></p>`,
+    `<p>12 = 2 × 2 × 3 &nbsp;&nbsp;and&nbsp;&nbsp; 28 = 2 × 2 × 7</p>`,
+    `<p><b>Step 2 — sort those primes into a Venn diagram.</b> Put the primes the two numbers <b>share</b> in the overlap; put the primes that belong to only one number in that circle on its own:</p>` + venn12and28(),
+    `<p><b>Step 3 — read the HCF off the overlap.</b><br>
+        The overlap contains 2 and 2, so HCF = 2 × 2 = <b>4</b>.</p>`,
+    `<p><b>Step 4 — read the LCM off the whole diagram.</b><br>
+        Multiply <i>every</i> number shown, in the overlap and outside it:<br>
+        LCM = 2 × 2 × 3 × 7 = <b>84</b>.</p>`,
+    `<p class="ans">Answer: LCM = <b>84</b> &nbsp;(and the same diagram shows HCF = 4)</p>`,
+    `<p><b>Check by listing multiples:</b><br>
+        Multiples of 12: 12, 24, 36, 48, 60, 72, <b>84</b>, …<br>
+        Multiples of 28: 28, 56, <b>84</b>, …<br>
+        The first number in both lists is 84 ✓</p>`,
+    `<p><b>Careful:</b> the LCM is <i>not</i> just the product of the shared primes — that is the HCF. The LCM uses every prime in the diagram, including the ones outside the overlap.</p>`
+  ],
+  tasks:[
+    {title:'Practice · finding an LCM', steps:[
+      {
+        q:'Multiples of 8: 8, 16, 24, 32, 40… &nbsp; Multiples of 12: 12, 24, 36, 48… &nbsp; What is the <b>lowest common multiple</b>?',
+        opts:[
+          {t:'24', ok:true, ex:'24 is the first number to appear in both lists, so LCM(8, 12) = 24.'},
+          {t:'48', fb:'48 is a common multiple, but 24 comes first — LCM means the LOWEST one.'},
+          {t:'96', fb:'Far too big — keep going only until the lists first match.'},
+          {t:'4', fb:'4 is a common FACTOR (that is the HCF), not a multiple.'}
+        ]
+      },
+      {
+        q:'Using primes: 8 = 2 × 2 × 2 and 12 = 2 × 2 × 3. The LCM uses every prime in the Venn diagram: 2 × 2 × 2 × 3 = ?',
+        opts:[
+          {t:'24', ok:true, ex:'2 × 2 × 2 × 3 = 24, which matches the listing method ✓'},
+          {t:'48', fb:'That would be doubling 24 — check the multiplication.'},
+          {t:'12', fb:'12 is not a multiple of 8.'},
+          {t:'36', fb:'36 is not a multiple of 8.'}
+        ]
+      }
+    ]},
+    {title:'Practice', steps:[{
+      q:'Find the LCM of <b>6 and 9</b>.',
+      opts:[
+        {t:'3', fb:'3 is the highest common FACTOR, not the LCM.'},
+        {t:'18', ok:true, ex:'Multiples of 6: 6, 12, 18… Multiples of 9: 9, 18… So LCM = 18.'},
+        {t:'36', fb:'36 is a common multiple, but 18 comes first.'},
+        {t:'54', fb:'54 is a common multiple, but it is not the lowest one.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Find the LCM of <b>10 and 15</b>.',
+      opts:[
+        {t:'5', fb:'5 is the highest common factor, not the LCM.'},
+        {t:'30', ok:true, ex:'Multiples of 10: 10, 20, 30… Multiples of 15: 15, 30… So LCM = 30.'},
+        {t:'60', fb:'60 is a common multiple, but 30 comes first.'},
+        {t:'150', fb:'That is 10 × 15 — not the lowest common multiple.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q27 ---------------- */
+{
+  n:27, unit:3, title:'Using a known prime factorisation',
+  question:`<p>Given that <b>20 = 2 × 2 × 5</b>, write <b>60</b> as a product of prime factors.</p>`,
+  solution:[
+    `<p>Spot the link: 60 = 3 × 20.</p>`,
+    `<p>Substitute the prime factorisation of 20 into that:</p>`,
+    `<p>60 = 3 × (2 × 2 × 5)</p>`,
+    `<p>So 60 = 3 × 2 × 2 × 5 — every factor is prime, so we are done.</p>`,
+    `<p class="ans">Answer: <b>60 = 2 × 2 × 3 × 5</b></p>`,
+    `<p><b>Check:</b> 2 × 2 × 3 × 5 = 4 × 15 = 60 ✓</p>`
+  ],
+  tasks:[
+    {title:'Practice · substituting', steps:[{
+      q:'Given 15 = 3 × 5, write <b>45</b> as a product of prime factors.',
+      opts:[
+        {t:'3 × 3 × 5', ok:true, ex:'45 = 3 × 15 = 3 × 3 × 5. Check: 9 × 5 = 45 ✓'},
+        {t:'3 × 5', fb:'That is 15, not 45 — you need one more 3.'},
+        {t:'3 × 15', fb:'15 is not prime, so keep going: 15 = 3 × 5.'},
+        {t:'9 × 5', fb:'9 is not prime — write it as 3 × 3.'}
+      ]}]},
+    {title:'Practice · substituting again', steps:[{
+      q:'Given 12 = 2 × 2 × 3, write <b>84</b> as a product of prime factors.',
+      opts:[
+        {t:'2 × 2 × 3 × 7', ok:true, ex:'84 = 7 × 12 = 7 × 2 × 2 × 3. Check: 4 × 3 × 7 = 84 ✓'},
+        {t:'2 × 3 × 7', fb:'That is 42 — you need the 12 doubled.'},
+        {t:'4 × 3 × 7', fb:'4 is not prime — write it as 2 × 2.'},
+        {t:'2 × 2 × 21', fb:'21 is not prime — split it into 3 × 7.'}
+      ]}]},
+    {title:'Practice', steps:[{
+      q:'Given 10 = 2 × 5, write <b>70</b> as a product of prime factors.',
+      opts:[
+        {t:'2 × 5 × 7', ok:true, ex:'70 = 7 × 10 = 7 × 2 × 5, and 2, 5 and 7 are all prime.'},
+        {t:'7 × 10', fb:'10 is not prime — write it as 2 × 5.'},
+        {t:'2 × 35', fb:'35 is not prime — it is 5 × 7.'},
+        {t:'2 × 5', fb:'That is only 10. You need to multiply by 7 as well.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q28 ---------------- */
+{
+  n:28, unit:3, title:'Numbers with exactly three factors',
+  question:`<p>Lana is thinking of a number. She says, "My number is between 10 and 50. It has <b>exactly three factors</b>." Find the two possible numbers Lana could be thinking of.</p>`,
+  solution:[
+    `<p>Most numbers have an even number of factors, because factors come in pairs (like 2 × 10 = 20).</p>`,
+    `<p>The only way to get an odd number of factors is if one pair is a number multiplied by itself — i.e. a <b>square number</b>.</p>`,
+    `<p>For <b>exactly three</b> factors, the number must be the square of a <b>prime</b>: p × p, giving factors 1, p and p².</p>`,
+    `<p>The prime squares are: 2² = 4, 3² = 9, 5² = 25, 7² = 49, 11² = 121, …</p>`,
+    `<p>Which of these lie between 10 and 50? &nbsp;<b>25</b> (factors 1, 5, 25) and <b>49</b> (factors 1, 7, 49).</p>`,
+    `<p class="ans">Answers: <b>25 and 49</b></p>`
+  ],
+  tasks:[
+    {title:'Practice · spotting a three-factor number', steps:[
+      {
+        q:'A number with exactly three factors must be the square of a prime. Which of these is a <b>prime squared</b>?',
+        opts:[
+          {t:'16', fb:'16 = 4², but 4 is not prime — and 16 actually has five factors: 1, 2, 4, 8, 16.'},
+          {t:'25', ok:true, ex:'25 = 5² and 5 is prime, so 25 has exactly three factors: 1, 5, 25.'},
+          {t:'21', fb:'21 is not a square number at all.'},
+          {t:'27', fb:'27 = 3 × 3 × 3, not a square, and it has four factors.'}
+        ]
+      },
+      {
+        q:'How many factors does <b>25</b> have?',
+        opts:[
+          {t:'2', fb:'That is only 1 and 25 — you have missed 5.'},
+          {t:'3', ok:true, ex:'The factors are 1, 5 and 25 — exactly three.'},
+          {t:'4', fb:'List them: 1, 5, 25. There are only three.'},
+          {t:'5', fb:'There are only three factors of 25.'}
+        ]
+      }
+    ]},
+    {title:'Practice', steps:[{
+      q:'Which number has <b>exactly three</b> factors?',
+      opts:[
+        {t:'16', fb:'16 has five factors: 1, 2, 4, 8, 16.'},
+        {t:'25', ok:true, ex:'25 has 1, 5 and 25 — exactly three.'},
+        {t:'27', fb:'27 has four factors: 1, 3, 9, 27.'},
+        {t:'36', fb:'36 has nine factors: 1, 2, 3, 4, 6, 9, 12, 18, 36.'}
+      ]}]},
+    {title:'Practice · exactly four factors', steps:[{
+      q:'Which number has <b>exactly four</b> factors?',
+      opts:[
+        {t:'7', fb:'7 is prime, so it has only two factors: 1 and 7.'},
+        {t:'8', ok:true, ex:'8 has 1, 2, 4 and 8 — exactly four factors.'},
+        {t:'9', fb:'9 has three factors: 1, 3, 9.'},
+        {t:'11', fb:'11 is prime, so it has only two factors.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q29 ---------------- */
+{
+  n:29, unit:3, title:'Sums of three primes',
+  question:`<p>Three prime numbers add up to 30. Give an example of what the three prime numbers could be.</p>`,
+  solution:[
+    `<p>30 is an <b>even</b> number. Adding three odd numbers always gives an <b>odd</b> total, so at least one of the primes must be even.</p>`,
+    `<p>The only even prime is <b>2</b>. So one of the numbers must be 2.</p>`,
+    `<p>That leaves 30 − 2 = 28 to be made from two primes.</p>`,
+    `<p>Look for pairs of primes with total 28: &nbsp;5 + 23 = 28 ✓ &nbsp; and &nbsp; 11 + 17 = 28 ✓</p>`,
+    `<p class="ans">Answers: <b>2, 5, 23</b> &nbsp;or&nbsp; <b>2, 11, 17</b></p>`,
+    `<p><b>Check:</b> 2 + 11 + 17 = 30 ✓ and all three are prime.</p>`
+  ],
+  tasks:[
+    {title:'Practice · reasoning with primes', steps:[
+      {
+        q:'Three prime numbers add up to 20, which is even. What must one of the primes be?',
+        opts:[
+          {t:'2', ok:true, ex:'Three odd numbers add to an odd total, so one prime must be even — and 2 is the only even prime.'},
+          {t:'3', fb:'If all three were odd, the total would be odd. One of them must be the even prime, 2.'},
+          {t:'5', fb:'5 is odd — you still need an even prime in the mix.'},
+          {t:'7', fb:'7 is odd — the total of three odd numbers is always odd.'}
+        ]
+      },
+      {
+        q:'The other two primes must add up to 18. Which pair works?',
+        opts:[
+          {t:'7 and 11', ok:true, ex:'7 + 11 = 18 and both are prime, so 2 + 7 + 11 = 20 ✓'},
+          {t:'1 and 17', fb:'1 is not prime — it has only one factor.'},
+          {t:'9 and 9', fb:'9 = 3 × 3, so 9 is not prime.'},
+          {t:'3 and 15', fb:'15 = 3 × 5, so 15 is not prime.'}
+        ]
+      }
+    ]},
+    {title:'Practice', steps:[{
+      q:'Which set of three prime numbers adds up to <b>30</b>?',
+      opts:[
+        {t:'2, 11, 17', ok:true, ex:'2 + 11 + 17 = 30 and 2, 11 and 17 are all prime ✓'},
+        {t:'3, 7, 20', fb:'20 is not prime, even though the total is 30.'},
+        {t:'5, 9, 16', fb:'9 and 16 are not prime.'},
+        {t:'7, 11, 12', fb:'12 is not prime.'}
+      ]}]}
+  ]
+},
+
+/* ---------------- Q30 ---------------- */
+{
+  n:30, unit:3, title:'HCF and LCM together',
+  question:`<p>The highest common factor (HCF) of two numbers is 6. Their lowest common multiple (LCM) is 72. Both numbers are greater than 6. What are the two numbers?</p>`,
+  solution:[
+    `<p>Because the HCF is 6, both numbers can be written as 6 × (something): let the numbers be <b>6m</b> and <b>6n</b>, where m and n share no common factor.</p>`,
+    `<p>For such a pair, the LCM is 6 × m × n. So:</p>`,
+    `<p>6 × m × n = 72 &nbsp;→&nbsp; m × n = 12</p>`,
+    `<p>List the pairs that multiply to 12: (1, 12), (2, 6), (3, 4).</p>`,
+    `<p>Now check which pair gives both numbers greater than 6:</p>
+     <table class="pv">
+       <tr><th>m, n</th><th>Numbers 6m, 6n</th><th>Both &gt; 6?</th><th>HCF</th></tr>
+       <tr><td>1, 12</td><td>6 and 72</td><td>✗ (6 is not &gt; 6)</td><td>6</td></tr>
+       <tr><td>2, 6</td><td>12 and 36</td><td>✓</td><td>12 (not 6) ✗</td></tr>
+       <tr><td>3, 4</td><td><b>18 and 24</b></td><td>✓</td><td>6 ✓</td></tr>
+     </table>`,
+    `<p class="ans">Answer: <b>18 and 24</b> &nbsp;(HCF = 6, LCM = 72 ✓)</p>`
+  ],
+  tasks:[
+    {title:'Practice · using HCF and LCM together', steps:[
+      {
+        q:'The HCF of two numbers is 4 and their LCM is 24. Writing the numbers as 4m and 4n, we need 4 × m × n = 24. What is <b>m × n</b>?',
+        opts:[
+          {t:'4', fb:'Divide 24 by 4 to get m × n.'},
+          {t:'6', ok:true, ex:'24 ÷ 4 = 6, so m × n = 6.'},
+          {t:'8', fb:'Check: 4 × 8 = 32, not 24.'},
+          {t:'12', fb:'4 × 12 = 48, not 24.'}
+        ]
+      },
+      {
+        q:'Which pair (m, n) multiplies to 6 <b>and</b> gives both numbers greater than 4?',
+        opts:[
+          {t:'(1, 6) → 4 and 24', fb:'4 is not greater than 4, so this pair does not fit the question.'},
+          {t:'(2, 3) → 8 and 12', ok:true, ex:'8 and 12 are both greater than 4; their HCF is 4 and their LCM is 24 ✓'},
+          {t:'(3, 3) → 12 and 12', fb:'3 and 3 share a common factor, so the HCF would not be 4.'},
+          {t:'(6, 1) → 24 and 4', fb:'4 is not greater than 4.'}
+        ]
+      }
+    ]},
+    {title:'Practice', steps:[{
+      q:'Two numbers have HCF 5 and LCM 30. Both are greater than 5. What are the two numbers?',
+      opts:[
+        {t:'5 and 30', fb:'The HCF is 5 and the LCM is 30, but 5 is not greater than 5.'},
+        {t:'10 and 15', ok:true, ex:'HCF(10, 15) = 5 and LCM(10, 15) = 30 ✓ Both are greater than 5.'},
+        {t:'6 and 25', fb:'The HCF of 6 and 25 is 1, not 5.'},
+        {t:'15 and 20', fb:'The LCM of 15 and 20 is 60, not 30.'}
+      ]}]}
+  ]
+}
+
+];
+
+/* =====================================================================
+   APP STATE + RENDERING
+   ===================================================================== */
+const state = { current:0, revealed:{}, tasks:{} };
+const mainEl  = document.getElementById('main');
+const navEl   = document.getElementById('nav');
+
+const UNITS = {
+  1:{name:'Unit 1 · The decimal number system', range:'Questions 1–9'},
+  2:{name:'Unit 2 · Properties of arithmetic', range:'Questions 10–16'},
+  3:{name:'Unit 3 · Factors and multiples', range:'Questions 17–30'}
+};
+
+function taskKey(qi,ti){ return qi + '|' + ti; }
+function getTaskState(qi,ti){
+  const k = taskKey(qi,ti);
+  if(!state.tasks[k]) state.tasks[k] = {stepIndex:0, picks:{}, fb:{}, fbType:{}, complete:false};
+  return state.tasks[k];
+}
+
+/* ---------- sidebar ---------- */
+function buildNav(){
+  let html = '';
+  let lastUnit = null;
+  QUESTIONS.forEach((q,qi)=>{
+    if(q.unit !== lastUnit){
+      if(lastUnit !== null) html += `</div></div>`;
+      html += `<div class="navgroup"><h3>${UNITS[q.unit].name}</h3><div class="navgrid">`;
+      lastUnit = q.unit;
+    }
+    html += `<button class="navbtn" data-qi="${qi}" title="${q.title}">${q.n}</button>`;
+  });
+  html += `</div></div>`;
+  navEl.innerHTML = html;
+  navEl.querySelectorAll('.navbtn').forEach(b=>{
+    b.addEventListener('click',()=>{ state.current = +b.dataset.qi; renderQuestion(); window.scrollTo({top:0,behavior:'smooth'}); });
+  });
+}
+
+/* ---------- progress ---------- */
+function updateProgress(){
+  let done = 0, total = 0;
+  QUESTIONS.forEach((q,qi)=>{
+    let qDone = 0;
+    q.tasks.forEach((t,ti)=>{
+      total++;
+      if(getTaskState(qi,ti).complete){ done++; qDone++; }
+    });
+    const btn = navEl.querySelector(`.navbtn[data-qi="${qi}"]`);
+    if(btn) btn.classList.toggle('done', qDone === q.tasks.length);
+  });
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('barfill').style.width = pct + '%';
+  document.getElementById('pctTxt').textContent = done + ' / ' + total;
+}
+
+/* ---------- solution panel ---------- */
+function paintSolution(){
+  const qi = state.current, q = QUESTIONS[qi];
+  const shown = state.revealed[qi] || 0;
+  const box  = document.getElementById('solbox');
+  const btns = document.getElementById('solbtns');
+  if(!box) return;
+
+  if(shown === 0){
+    box.innerHTML = `<p class="hint">Have a go at the question first, then reveal the worked solution one step at a time.</p>`;
+  } else {
+    box.innerHTML = q.solution.slice(0, shown).map((s,i)=>
+      `<div class="solstep"><span class="snum">${i+1}</span><div>${s}</div></div>`
+    ).join('');
+  }
+
+  let b = '';
+  if(shown < q.solution.length){
+    b += `<button class="btn primary" data-sol="next">${shown === 0 ? 'Reveal step 1' : 'Reveal step ' + (shown+1)}</button>`;
+    if(q.solution.length > 1) b += `<button class="btn" data-sol="all">Show all ${q.solution.length} steps</button>`;
+  } else {
+    b += `<button class="btn" data-sol="reset">Hide solution</button>`;
+  }
+  if(shown > 0 && shown < q.solution.length) b += `<button class="btn ghost" data-sol="reset">Hide</button>`;
+  btns.innerHTML = b;
+}
+
+/* ---------- practice tasks ---------- */
+function taskHTML(task, st, ti){
+  let h = '';
+  task.steps.forEach((step, si)=>{
+    if(si > st.stepIndex) return;                       // not reached yet
+    const solved = si < st.stepIndex;
+    h += `<div class="step ${solved ? 'solved' : ''}">`;
+    h += `<div class="step-q"><span class="snum">${si+1}</span><span>${step.q}</span></div>`;
+    h += `<div class="opts">`;
+    step.opts.forEach((o, oi)=>{
+      const picked = st.picks[si] === oi;
+      let cls = 'opt';
+      if(picked) cls += o.ok ? ' correct' : ' wrong';
+      h += `<button class="${cls}" data-task="${ti}" data-step="${si}" data-opt="${oi}" ${solved ? 'disabled' : ''}>${o.t}</button>`;
+    });
+    h += `</div>`;
+    if(st.fb[si]) h += `<div class="fb ${st.fbType[si]}">${st.fb[si]}</div>`;
+    h += `</div>`;
+  });
+  if(st.complete) h += `<div class="taskdone">✓ Task complete — nicely done!</div>`;
+  return h;
+}
+
+function paintTask(qi,ti){
+  const task = QUESTIONS[qi].tasks[ti];
+  const st   = getTaskState(qi,ti);
+  const body = document.querySelector(`.task[data-ti="${ti}"] .task-body`);
+  if(body) body.innerHTML = taskHTML(task, st, ti);
+}
+
+function handleAnswer(qi,ti,si,oi){
+  const task = QUESTIONS[qi].tasks[ti];
+  const step = task.steps[si];
+  const st   = getTaskState(qi,ti);
+  if(si < st.stepIndex) return;              // already solved
+  const opt = step.opts[oi];
+
+  st.picks[si] = oi;
+  if(opt.ok){
+    st.fb[si]     = opt.ex || 'Correct!';
+    st.fbType[si] = 'ok';
+    st.stepIndex  = si + 1;
+    if(st.stepIndex >= task.steps.length) st.complete = true;
+  } else {
+    st.fb[si]     = opt.fb || 'Not quite — have another look.';
+    st.fbType[si] = 'bad';
+  }
+  paintTask(qi,ti);
+  updateProgress();
+}
+
+/* ---------- main question render ---------- */
+function renderQuestion(){
+  const qi = state.current;
+  const q  = QUESTIONS[qi];
+
+  let tasksHTML = '';
+  q.tasks.forEach((task,ti)=>{
+    const st = getTaskState(qi,ti);
+    tasksHTML += `<div class="task" data-ti="${ti}">
+        <div class="task-head"><span>${task.title || 'Your turn'}</span><span>${ti+1} of ${q.tasks.length}</span></div>
+        <div class="task-body">${taskHTML(task, st, ti)}</div>
+      </div>`;
+  });
+
+  mainEl.innerHTML = `
+    <section class="qcard">
+      <div class="qhead">
+        <div class="qnum">${q.n}</div>
+        <div class="qmeta">
+          <h2>${q.title}</h2>
+          <span class="tag">${UNITS[q.unit].name}</span>
+        </div>
+      </div>
+
+      <div class="qbody">${q.question}</div>
+
+      <div class="twocol">
+        <div class="col sol">
+          <h3>Worked solution — step by step</h3>
+          <div id="solbox"></div>
+          <div class="solbtns" id="solbtns"></div>
+        </div>
+
+        <div class="col prac">
+          <h3>Your turn — similar questions</h3>
+          ${tasksHTML}
+        </div>
+      </div>
+    </section>`;
+
+  paintSolution();
+
+  /* nav highlight */
+  navEl.querySelectorAll('.navbtn').forEach(b=>
+    b.classList.toggle('active', +b.dataset.qi === qi));
+  updateProgress();
+}
+
+/* ---------- global click handling ---------- */
+mainEl.addEventListener('click', (e)=>{
+  /* solution buttons */
+  const solBtn = e.target.closest('[data-sol]');
+  if(solBtn){
+    const qi = state.current, q = QUESTIONS[qi];
+    const cur = state.revealed[qi] || 0;
+    const act = solBtn.dataset.sol;
+    if(act === 'next')      state.revealed[qi] = Math.min(cur + 1, q.solution.length);
+    else if(act === 'all')  state.revealed[qi] = q.solution.length;
+    else if(act === 'reset')state.revealed[qi] = 0;
+    paintSolution();
+    return;
+  }
+
+  /* practice options */
+  const optBtn = e.target.closest('.opt');
+  if(optBtn && !optBtn.disabled){
+    handleAnswer(state.current, +optBtn.dataset.task, +optBtn.dataset.step, +optBtn.dataset.opt);
+  }
+});
+
+/* ---------- boot ---------- */
+buildNav();
+renderQuestion();
+</script>
+</body>
+</html>
